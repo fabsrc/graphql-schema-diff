@@ -1,0 +1,38 @@
+{
+  "name": "graphql-schema-diff",
+  "version": "0.1.0",
+  "description": "Generates diffs of two GraphQL schemas and detects breaking changes",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepack": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:fix": "prettier --parser typescript --single-quote --write src/**"
+  },
+  "bin": "dist/index.js",
+  "keywords": [
+    "graphql",
+    "schema",
+    "diff"
+  ],
+  "author": "Fabian Schneider",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "disparity": "^2.0.0",
+    "graphql": "^14.1.1",
+    "is-glob": "^4.0.0",
+    "merge-graphql-schemas": "^1.5.8",
+    "node-fetch": "^2.3.0",
+    "yargs": "^12.0.5"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.0.5",
+    "@types/is-glob": "^4.0.0",
+    "@types/node": "^10.12.18",
+    "@types/node-fetch": "^2.1.4",
+    "prettier": "^1.16.1",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.2.4"
+  }
+}
