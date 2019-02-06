@@ -13,7 +13,6 @@ import {
 } from 'graphql';
 import fetch from 'node-fetch';
 import disparity from 'disparity';
-import path from 'path';
 import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
 import isGlob from 'is-glob';
 
@@ -44,7 +43,7 @@ async function fetchRemoteSchema(endpoint: string): Promise<GraphQLSchema> {
 
 async function readLocalSchema(schemaPath: string): Promise<GraphQLSchema> {
   if (isGlob(schemaPath)) {
-    const typesArray = fileLoader(path.join(__dirname, schemaPath));
+    const typesArray = fileLoader(schemaPath);
     const mergedSchema = mergeTypes(typesArray, { all: true });
     return Promise.resolve(buildSchema(mergedSchema));
   } else {
