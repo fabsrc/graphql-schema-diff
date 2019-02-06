@@ -31,6 +31,13 @@ async function fetchRemoteSchema(endpoint: string): Promise<GraphQLSchema> {
     },
     body: JSON.stringify({ query: introspectionQuery })
   })
+    .then(res => {
+      if (res.ok) {
+        return res;
+      }
+
+      throw new Error(res.statusText);
+    })
     .then(res => res.json())
     .then(({ data }: { data: IntrospectionQuery }) => buildClientSchema(data));
 }
