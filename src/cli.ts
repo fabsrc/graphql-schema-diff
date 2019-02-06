@@ -2,7 +2,7 @@
 
 import meow from 'meow';
 import chalk from 'chalk';
-import { GraphQLSchemaDiff } from '.';
+import { getDiff } from '.';
 
 const cli = meow(
   `
@@ -32,16 +32,18 @@ if (!cli.input[0] || !cli.input[1]) {
   throw new Error('Schema locations missing!');
 }
 
-const graphQLSchemaDiff = new GraphQLSchemaDiff(cli.input[0], cli.input[1]);
-graphQLSchemaDiff.getDiff().then(result => {
+getDiff(cli.input[0], cli.input[1]).then(result => {
   if (result === undefined) {
     console.log(chalk.green('✔ No changes'));
     return;
   }
 
+  const hasBreakingChanges = () => result.breakingChanges.length !== 0;
+  const hasDangerousChanges = () => result.dangerousChanges.length !== 0;
+
   console.log(result.diff);
 
-  if (result.dangerousChanges.length !== 0) {
+  if (hasDangerousChanges) {
     console.log(chalk.yellow.bold.underline('Dangerous changes:'));
 
     for (const change of result.dangerousChanges) {
@@ -49,14 +51,11 @@ graphQLSchemaDiff.getDiff().then(result => {
     }
   }
 
-  if (
-    result.dangerousChanges.length !== 0 &&
-    result.breakingChanges.length !== 0
-  ) {
+  if (hasDangerousChanges && hasBreakingChanges) {
     console.log(); // Add additional line break
   }
 
-  if (result.breakingChanges.length !== 0) {
+  if (hasBreakingChanges) {
     console.log(chalk.red.bold.underline('BREAKING CHANGES:'));
 
     for (const change of result.breakingChanges) {
@@ -65,9 +64,8 @@ graphQLSchemaDiff.getDiff().then(result => {
   }
 
   if (
-    (result.dangerousChanges.length !== 0 &&
-      cli.flags.failOnDangerousChanges) ||
-    (result.breakingChanges.length !== 0 && !cli.flags.ignoreBreakingChanges)
+    (hasDangerousChanges && cli.flags.failOnDangerousChanges) ||
+    (hasBreakingChanges && !cli.flags.ignoreBreakingChanges)
   ) {
     process.exit(1);
     return;
