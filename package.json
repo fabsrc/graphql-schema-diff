@@ -17,6 +17,14 @@
   ],
   "author": "Fabian Schneider",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fabsrc/graphql-schema-diff/issues"
+  },
+  "homepage": "https://github.com/fabsrc/graphql-schema-diff#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabsrc/graphql-schema-diff"
+  },
   "dependencies": {
     "chalk": "^2.4.2",
     "disparity": "^2.0.0",
