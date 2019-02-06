@@ -1,7 +1,4 @@
-#!/usr/bin/env node
-
 import fs from 'fs';
-import chalk from 'chalk';
 import {
   printSchema,
   findBreakingChanges,
@@ -10,7 +7,9 @@ import {
   introspectionQuery,
   buildClientSchema,
   buildSchema,
-  IntrospectionQuery
+  IntrospectionQuery,
+  DangerousChange,
+  BreakingChange
 } from 'graphql';
 import fetch from 'node-fetch';
 import disparity from 'disparity';
@@ -18,67 +17,88 @@ import path from 'path';
 import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
 import isGlob from 'is-glob';
 
-function getRemoteSchema(endpoint: string): Promise<GraphQLSchema> {
-  return fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify({ query: introspectionQuery })
-  })
-    .then(res => res.json())
-    .then(({ data }: { data: IntrospectionQuery }) => buildClientSchema(data));
+interface DiffResponse {
+  diff: string;
+  dangerousChanges: DangerousChange[];
+  breakingChanges: BreakingChange[];
 }
 
-function getLocalSchema(schemaPath: string): Promise<GraphQLSchema> {
-  if (isGlob(schemaPath)) {
-    const typesArray = fileLoader(path.join(__dirname, schemaPath));
-    const mergedSchema = mergeTypes(typesArray, { all: true });
-    return Promise.resolve(buildSchema(mergedSchema));
-  } else {
-    const schemaString = fs.readFileSync(schemaPath, 'utf8');
-    return Promise.resolve(buildSchema(schemaString));
-  }
-}
+export class GraphQLSchemaDiff {
+  private schema1: GraphQLSchema | undefined;
+  private schema2: GraphQLSchema | undefined;
+  private schema1SDL: string = '';
+  private schema2SDL: string = '';
 
-function getSchema(schemaLocation: string): Promise<GraphQLSchema> {
-  if (schemaLocation.match(/^https?/)) {
-    return getRemoteSchema(schemaLocation);
-  } else {
-    return getLocalSchema(schemaLocation);
-  }
-}
+  constructor(
+    private schema1Location: string,
+    private schema2Location: string
+  ) {}
 
-const [, , schema1Location, schema2Location] = process.argv;
-const schemaInputs = [schema1Location, schema2Location].map(getSchema);
-
-Promise.all(schemaInputs).then(([schema1, schema2]) => {
-  const schema1SDL = printSchema(schema1);
-  const schema2SDL = printSchema(schema2);
-  if (schema1SDL === schema2SDL) {
-    console.log(chalk.green('✔ No changes'));
-    return;
+  private async fetchRemoteSchema(endpoint: string): Promise<GraphQLSchema> {
+    return fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ query: introspectionQuery })
+    })
+      .then(res => res.json())
+      .then(({ data }: { data: IntrospectionQuery }) =>
+        buildClientSchema(data)
+      );
   }
 
-  const diff = disparity.unified(schema1SDL, schema2SDL, {
-    paths: [schema1Location, schema2Location]
-  });
-  console.log(diff);
-
-  const dangerousChanges = findDangerousChanges(schema1, schema2);
-  if (dangerousChanges.length !== 0) {
-    console.log(chalk.yellow.bold.underline('Dangerous changes:'));
-    for (const change of dangerousChanges) {
-      console.log(chalk.yellow('  ⚠ ' + change.description));
+  private async readLocalSchema(schemaPath: string): Promise<GraphQLSchema> {
+    if (isGlob(schemaPath)) {
+      const typesArray = fileLoader(path.join(__dirname, schemaPath));
+      const mergedSchema = mergeTypes(typesArray, { all: true });
+      return Promise.resolve(buildSchema(mergedSchema));
+    } else {
+      const schemaString = fs.readFileSync(schemaPath, 'utf8');
+      return Promise.resolve(buildSchema(schemaString));
     }
   }
 
-  const breakingChanges = findBreakingChanges(schema1, schema2);
-  if (breakingChanges.length !== 0) {
-    console.log(chalk.red.bold.underline('BREAKING CHANGES:'));
-    for (const change of breakingChanges) {
-      console.log(chalk.red('  ✖ ' + change.description));
+  private async getSchema(schemaLocation: string): Promise<GraphQLSchema> {
+    if (schemaLocation.match(/^https?/)) {
+      return this.fetchRemoteSchema(schemaLocation);
+    } else {
+      return this.readLocalSchema(schemaLocation);
     }
-    process.exit(1);
   }
-});
+
+  private async loadSchemas(): Promise<void> {
+    [this.schema1, this.schema2] = await Promise.all(
+      [this.schema1Location, this.schema2Location].map(schemaLocation =>
+        this.getSchema(schemaLocation)
+      )
+    );
+    [this.schema1SDL, this.schema2SDL] = [this.schema1, this.schema2].map(
+      schema => printSchema(schema) || ''
+    );
+  }
+
+  public async getDiff(): Promise<DiffResponse | undefined> {
+    await this.loadSchemas();
+
+    if (!this.schema1 || !this.schema2) {
+      throw new Error('Schemas not defined');
+    }
+
+    if (this.schema1SDL === this.schema2SDL) {
+      return;
+    }
+
+    const diff = disparity.unified(this.schema1SDL, this.schema2SDL, {
+      paths: [this.schema1Location, this.schema2Location]
+    });
+    const dangerousChanges = findDangerousChanges(this.schema1, this.schema2);
+    const breakingChanges = findBreakingChanges(this.schema1, this.schema2);
+
+    return {
+      diff,
+      dangerousChanges,
+      breakingChanges
+    };
+  }
+}
