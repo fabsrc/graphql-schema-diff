@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "prepack": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint:fix": "prettier --parser typescript --single-quote --write src/**"
   },
   "bin": "dist/cli.js",
@@ -37,10 +37,13 @@
   "devDependencies": {
     "@types/graphql": "^14.0.5",
     "@types/is-glob": "^4.0.0",
+    "@types/jest": "^24.0.0",
     "@types/meow": "^5.0.0",
     "@types/node": "^10.12.18",
     "@types/node-fetch": "^2.1.4",
+    "jest": "^24.1.0",
     "prettier": "^1.16.1",
+    "ts-jest": "^23.10.5",
     "ts-node": "^8.0.2",
     "typescript": "^3.2.4"
   }
