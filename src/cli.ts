@@ -41,8 +41,8 @@ getDiff(schema1Location, schema2Location)
       return;
     }
 
-    const hasBreakingChanges = () => result.breakingChanges.length !== 0;
-    const hasDangerousChanges = () => result.dangerousChanges.length !== 0;
+    const hasBreakingChanges = result.breakingChanges.length !== 0;
+    const hasDangerousChanges = result.dangerousChanges.length !== 0;
 
     console.log(result.diff);
 
