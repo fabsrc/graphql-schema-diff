@@ -1,7 +1,7 @@
 {
   "name": "graphql-schema-diff",
   "version": "0.1.2",
-  "description": "Generates diffs of two GraphQL schemas and detects breaking changes.",
+  "description": "Returns the diff of two GraphQL schemas and detects dangerous and breaking changes",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
