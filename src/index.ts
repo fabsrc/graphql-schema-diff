@@ -1,4 +1,3 @@
-import fs from 'fs';
 import {
   printSchema,
   findBreakingChanges,
@@ -11,16 +10,11 @@ import {
   DangerousChange,
   BreakingChange
 } from 'graphql';
+import fs from 'fs';
+import isGlob from 'is-glob';
 import fetch from 'node-fetch';
 import disparity from 'disparity';
 import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
-import isGlob from 'is-glob';
-
-interface DiffResponse {
-  diff: string;
-  dangerousChanges: DangerousChange[];
-  breakingChanges: BreakingChange[];
-}
 
 async function fetchRemoteSchema(endpoint: string): Promise<GraphQLSchema> {
   return fetch(endpoint, {
@@ -35,7 +29,7 @@ async function fetchRemoteSchema(endpoint: string): Promise<GraphQLSchema> {
         return res;
       }
 
-      throw new Error(res.statusText);
+      throw new Error(`${res.status} - ${res.statusText} (${endpoint})`);
     })
     .then(res => res.json())
     .then(({ data }: { data: IntrospectionQuery }) => buildClientSchema(data));
@@ -58,6 +52,12 @@ async function getSchema(schemaLocation: string): Promise<GraphQLSchema> {
   } else {
     return readLocalSchema(schemaLocation);
   }
+}
+
+interface DiffResponse {
+  diff: string;
+  dangerousChanges: DangerousChange[];
+  breakingChanges: BreakingChange[];
 }
 
 export async function getDiff(
