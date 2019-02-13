@@ -35,14 +35,14 @@ async function fetchRemoteSchema(endpoint: string): Promise<GraphQLSchema> {
     .then(({ data }: { data: IntrospectionQuery }) => buildClientSchema(data));
 }
 
-async function readLocalSchema(schemaPath: string): Promise<GraphQLSchema> {
+function readLocalSchema(schemaPath: string): GraphQLSchema {
   if (isGlob(schemaPath)) {
     const typesArray = fileLoader(schemaPath);
     const mergedSchema = mergeTypes(typesArray, { all: true });
-    return Promise.resolve(buildSchema(mergedSchema));
+    return buildSchema(mergedSchema);
   } else {
     const schemaString = fs.readFileSync(schemaPath, 'utf8');
-    return Promise.resolve(buildSchema(schemaString));
+    return buildSchema(schemaString);
   }
 }
 
@@ -64,19 +64,16 @@ export async function getDiff(
   schema1Location: string,
   schema2Location: string
 ): Promise<DiffResponse | undefined> {
-  const [schema1, schema2] = await Promise.all(
-    [schema1Location, schema2Location].map(schemaLocation =>
-      getSchema(schemaLocation)
-    )
-  );
+  const [schema1, schema2] = await Promise.all([
+    getSchema(schema1Location),
+    getSchema(schema2Location)
+  ]);
 
   if (!schema1 || !schema2) {
     throw new Error('Schemas not defined');
   }
 
-  const [schema1SDL, schema2SDL] = [schema1, schema2].map(
-    schema => printSchema(schema) || ''
-  );
+  const [schema1SDL, schema2SDL] = [printSchema(schema1), printSchema(schema2)];
 
   if (schema1SDL === schema2SDL) {
     return;
