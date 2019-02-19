@@ -28,7 +28,6 @@ Schema locations can be:
 ### Options
 
 * `fail-on-dangerous-changes`  Exit with error on dangerous changes.
-
 *  `ignore-breaking-changes`  Do not exit with error on breaking changes.
 
 ## API
