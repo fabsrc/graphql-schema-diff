@@ -48,5 +48,11 @@
     "ts-jest": "^24.0.0",
     "ts-node": "^8.0.2",
     "typescript": "^3.3.3"
+  },
+  "jest": {
+    "rootDir": "src",
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "collectCoverage": true
   }
 }
