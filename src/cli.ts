@@ -6,15 +6,15 @@ import { getDiff } from '.';
 
 const cli = meow(
   `
-	Usage
-	  $ graphql-schema-diff <schema1Location> <schema2Location>
+  Usage
+    $ graphql-schema-diff <schema1Location> <schema2Location>
 
   Options
     --fail-on-dangerous-changes  Exit with error on dangerous changes
     --ignore-breaking-changes  Do not exit with error on breaking changes
 
-	Examples
-	  $ graphql-schema-diff https://example.com/graphql schema.graphql
+  Examples
+    $ graphql-schema-diff https://example.com/graphql schema.graphql
 `,
   {
     flags: {
