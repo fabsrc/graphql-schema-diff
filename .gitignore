@@ -1,4 +1,4 @@
 node_modules/
 dist/
 coverage/
-*.graphql
+schema.graphql

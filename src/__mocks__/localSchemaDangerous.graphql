@@ -1,0 +1,8 @@
+enum TestEnum {
+  FIRST_VALUE
+  SECOND_VALUE
+}
+
+type Query {
+  test: String
+}
