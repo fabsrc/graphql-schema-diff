@@ -38,6 +38,11 @@ async function fetchRemoteSchema(endpoint: string): Promise<GraphQLSchema> {
 function readLocalSchema(schemaPath: string): GraphQLSchema {
   if (isGlob(schemaPath)) {
     const typesArray = fileLoader(schemaPath);
+
+    if (typesArray.length === 0) {
+      throw new Error(`No types found with glob pattern '${schemaPath}'`);
+    }
+
     const mergedSchema = mergeTypes(typesArray, { all: true });
     return buildSchema(mergedSchema);
   } else {
