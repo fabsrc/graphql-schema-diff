@@ -1,8 +1,8 @@
 import nock from 'nock';
 import path from 'path';
-import { getDiff } from '.';
+import { getDiff } from '../diff';
 import { introspectionQuery } from 'graphql';
-import introspectionResponse from './__mocks__/introspectionResponse.json';
+import introspectionResponse from './fixtures/introspectionResponse.json';
 
 describe('getDiff', () => {
   describe('remote schema fetching', () => {
@@ -41,7 +41,7 @@ describe('getDiff', () => {
     it('works with exact path to file', async () => {
       const localSchemaLocation = path.join(
         __dirname,
-        './__mocks__/localSchema.graphql'
+        './fixtures/localSchema.graphql'
       );
       const result = await getDiff(localSchemaLocation, localSchemaLocation);
       expect(result).toBeUndefined();
@@ -50,7 +50,7 @@ describe('getDiff', () => {
     it('works with glob pattern', async () => {
       const localSchemaLocation = path.join(
         __dirname,
-        './__mocks__/**/localSchema.graphql'
+        './fixtures/**/localSchema.graphql'
       );
       const result = await getDiff(localSchemaLocation, localSchemaLocation);
       expect(result).toBeUndefined();
@@ -78,8 +78,8 @@ describe('getDiff', () => {
   describe('schema diffing', () => {
     it('returns the exact diff between two schemas', async () => {
       const result = await getDiff(
-        path.join(__dirname, '__mocks__/localSchema.graphql'),
-        path.join(__dirname, '__mocks__/localSchemaDangerous.graphql')
+        path.join(__dirname, 'fixtures/localSchema.graphql'),
+        path.join(__dirname, 'fixtures/localSchemaDangerous.graphql')
       );
 
       expect(result).toBeDefined();
@@ -91,8 +91,8 @@ describe('getDiff', () => {
 
     it('returns dangerous changes', async () => {
       const result = await getDiff(
-        path.join(__dirname, '__mocks__/localSchema.graphql'),
-        path.join(__dirname, '__mocks__/localSchemaDangerous.graphql')
+        path.join(__dirname, 'fixtures/localSchema.graphql'),
+        path.join(__dirname, 'fixtures/localSchemaDangerous.graphql')
       );
 
       expect(result).toBeDefined();
@@ -109,8 +109,8 @@ describe('getDiff', () => {
 
     it('returns breaking changes', async () => {
       const result = await getDiff(
-        path.join(__dirname, '__mocks__/localSchema.graphql'),
-        path.join(__dirname, '__mocks__/localSchemaBreaking.graphql')
+        path.join(__dirname, 'fixtures/localSchema.graphql'),
+        path.join(__dirname, 'fixtures/localSchemaBreaking.graphql')
       );
 
       expect(result).toBeDefined();

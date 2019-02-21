@@ -2,6 +2,7 @@
 
 import meow from 'meow';
 import chalk from 'chalk';
+import { createHtmlOutput } from './html';
 import { getDiff } from '.';
 
 const cli = meow(
@@ -12,6 +13,7 @@ const cli = meow(
   Options
     --fail-on-dangerous-changes  Exit with error on dangerous changes
     --ignore-breaking-changes  Do not exit with error on breaking changes
+    --create-html  Creates an HTML file containing the diff
 
   Examples
     $ graphql-schema-diff https://example.com/graphql schema.graphql
@@ -22,6 +24,9 @@ const cli = meow(
         type: 'boolean'
       },
       'ignore-breaking-changes': {
+        type: 'boolean'
+      },
+      'create-html': {
         type: 'boolean'
       }
     }
@@ -64,6 +69,10 @@ getDiff(schema1Location, schema2Location)
       for (const change of result.breakingChanges) {
         console.log(chalk.red('  ✖ ' + change.description));
       }
+    }
+
+    if (cli.flags.createHtml) {
+      createHtmlOutput(result.diffNoColor);
     }
 
     if (
