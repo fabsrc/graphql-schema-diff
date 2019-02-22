@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "Returns the diff of two GraphQL schemas and detects dangerous and breaking changes",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prepack": "npm run build",
