@@ -16,7 +16,21 @@ $ npm install -g graphql-schema-diff
 ## Usage
 
 ```sh
-$ graphql-schema-diff <schema1Location> <schema2Location> 
+
+  Returns the diff of two GraphQL schemas. Detects dangerous and breaking changes.
+
+  Usage
+    $ graphql-schema-diff <schema1Location> <schema2Location>
+
+  Options
+    --fail-on-dangerous-changes  Exit with error on dangerous changes
+    --ignore-breaking-changes  Do not exit with error on breaking changes
+    --create-html-output  Creates an HTML file containing the diff
+    --html-output-directory  Directory where the HTML file should be stored (Default: './schemaDiff')
+
+  Examples
+    $ graphql-schema-diff https://example.com/graphql schema.graphql
+
 ```
 
 Schema locations can be:
@@ -25,10 +39,6 @@ Schema locations can be:
 * A path to a single file (e.g. `schemas/schema.graphql`)
 * A glob pattern to merge multiple files (e.g. `'schemas/**/*.graphql'`)
 
-### Options
-
-* `fail-on-dangerous-changes`  Exit with error on dangerous changes.
-*  `ignore-breaking-changes`  Do not exit with error on breaking changes.
 
 ## API
 

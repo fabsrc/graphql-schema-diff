@@ -6,9 +6,9 @@ const htmlTemplate = (diffHtml: string): string => `<html>
 <head>
   <title>GraphQL Schema Diff</title>
   <meta charset="utf-8" /> 
-  <link rel="stylesheet" href="lib/diff2html.css">
-  <script src="lib/diff2html.js"></script>
-  <script src="lib/diff2html-ui.js"></script>
+  <link rel="stylesheet" href="diff2html.css">
+  <script src="diff2html.js"></script>
+  <script src="diff2html-ui.js"></script>
   <style>
     html { box-sizing: border-box; }
     *,*:before,*:after { box-sizing: inherit; }
@@ -19,7 +19,12 @@ const htmlTemplate = (diffHtml: string): string => `<html>
 </body>
 </html>`;
 
-export function createHtmlOutput(diff: string): void {
+export interface Options {
+  outputDirectory?: string;
+}
+
+export function createHtmlOutput(diff: string, options: Options = {}): void {
+  const { outputDirectory = 'schemaDiff' } = options;
   const adjustedDiff = diff
     .replace(/(---\s.*)\sremoved/, '$1')
     .replace(/(\+\+\+\s.*)\sadded/, '$1');
@@ -31,10 +36,10 @@ export function createHtmlOutput(diff: string): void {
       'tag-file-renamed': ''
     }
   });
-  fs.ensureDirSync('diff');
-  fs.emptyDirSync('diff');
+  fs.ensureDirSync(outputDirectory);
+  fs.emptyDirSync(outputDirectory);
   const diff2HtmlPath = path.dirname(require.resolve('diff2html/package.json'));
-  fs.copySync(path.join(diff2HtmlPath, 'dist'), path.join('diff', 'lib'));
+  fs.copySync(path.join(diff2HtmlPath, 'dist'), outputDirectory);
   const htmlOutput = htmlTemplate(diffHtml);
-  fs.writeFileSync('diff/index.html', htmlOutput);
+  fs.writeFileSync(path.join(outputDirectory, 'index.html'), htmlOutput);
 }

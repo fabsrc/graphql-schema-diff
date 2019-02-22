@@ -13,7 +13,8 @@ const cli = meow(
   Options
     --fail-on-dangerous-changes  Exit with error on dangerous changes
     --ignore-breaking-changes  Do not exit with error on breaking changes
-    --create-html  Creates an HTML file containing the diff
+    --create-html-output  Creates an HTML file containing the diff
+    --html-output-directory  Directory where the HTML file should be stored (Default: './schemaDiff')
 
   Examples
     $ graphql-schema-diff https://example.com/graphql schema.graphql
@@ -26,8 +27,12 @@ const cli = meow(
       'ignore-breaking-changes': {
         type: 'boolean'
       },
-      'create-html': {
+      'create-html-output': {
         type: 'boolean'
+      },
+      'html-output-directory': {
+        type: 'string',
+        default: 'schemaDiff'
       }
     }
   }
@@ -71,8 +76,10 @@ getDiff(schema1Location, schema2Location)
       }
     }
 
-    if (cli.flags.createHtml) {
-      createHtmlOutput(result.diffNoColor);
+    if (cli.flags.createHtmlOutput) {
+      createHtmlOutput(result.diffNoColor, {
+        outputDirectory: cli.flags.htmlOutputDirectory
+      });
     }
 
     if (
