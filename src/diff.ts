@@ -59,7 +59,7 @@ async function getSchema(schemaLocation: string): Promise<GraphQLSchema> {
   }
 }
 
-interface DiffResponse {
+export interface DiffResponse {
   diff: string;
   diffNoColor: string;
   dangerousChanges: DangerousChange[];

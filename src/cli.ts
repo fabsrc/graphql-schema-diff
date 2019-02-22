@@ -45,7 +45,7 @@ if (!schema1Location || !schema2Location) {
 }
 
 getDiff(schema1Location, schema2Location)
-  .then(result => {
+  .then(async (result) => {
     if (result === undefined) {
       console.log(chalk.green('✔ No changes'));
       return;
@@ -77,7 +77,7 @@ getDiff(schema1Location, schema2Location)
     }
 
     if (cli.flags.createHtmlOutput) {
-      createHtmlOutput(result.diffNoColor, {
+      await createHtmlOutput(result.diffNoColor, {
         outputDirectory: cli.flags.htmlOutputDirectory
       });
     }
@@ -91,6 +91,6 @@ getDiff(schema1Location, schema2Location)
     }
   })
   .catch(err => {
-    console.error(chalk.red(err.message));
+    console.error(chalk.red(`\nERROR: ${err.message}`));
     process.exit(1);
   });

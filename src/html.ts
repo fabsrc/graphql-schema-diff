@@ -23,8 +23,13 @@ export interface Options {
   outputDirectory?: string;
 }
 
-export function createHtmlOutput(diff: string, options: Options = {}): void {
+export async function createHtmlOutput(diff: string, options: Options = {}): Promise<void> {
   const { outputDirectory = 'schemaDiff' } = options;
+
+  if (path.resolve(outputDirectory) === process.cwd()) {
+    throw new Error('Cannot write HTML output to current working directory');
+  }
+
   const adjustedDiff = diff
     .replace(/(---\s.*)\sremoved/, '$1')
     .replace(/(\+\+\+\s.*)\sadded/, '$1');
@@ -36,10 +41,10 @@ export function createHtmlOutput(diff: string, options: Options = {}): void {
       'tag-file-renamed': ''
     }
   });
-  fs.ensureDirSync(outputDirectory);
-  fs.emptyDirSync(outputDirectory);
+  await fs.ensureDir(outputDirectory);
+  await fs.emptyDir(outputDirectory);
   const diff2HtmlPath = path.dirname(require.resolve('diff2html/package.json'));
-  fs.copySync(path.join(diff2HtmlPath, 'dist'), outputDirectory);
+  await fs.copy(path.join(diff2HtmlPath, 'dist'), outputDirectory);
   const htmlOutput = htmlTemplate(diffHtml);
-  fs.writeFileSync(path.join(outputDirectory, 'index.html'), htmlOutput);
+  await fs.writeFile(path.join(outputDirectory, 'index.html'), htmlOutput);
 }
