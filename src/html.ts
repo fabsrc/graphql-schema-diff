@@ -23,7 +23,10 @@ export interface Options {
   outputDirectory?: string;
 }
 
-export async function createHtmlOutput(diff: string, options: Options = {}): Promise<void> {
+export async function createHtmlOutput(
+  diff: string,
+  options: Options = {}
+): Promise<void> {
   const { outputDirectory = 'schemaDiff' } = options;
 
   if (path.resolve(outputDirectory) === process.cwd()) {

@@ -45,7 +45,7 @@ if (!schema1Location || !schema2Location) {
 }
 
 getDiff(schema1Location, schema2Location)
-  .then(async (result) => {
+  .then(async result => {
     if (result === undefined) {
       console.log(chalk.green('✔ No changes'));
       return;
