@@ -5,7 +5,7 @@
 [![Dependencies](https://img.shields.io/david/fabsrc/graphql-schema-diff.svg?style=flat-square)](https://david-dm.org/fabsrc/graphql-schema-diff)
 [![Development Dependencies](https://img.shields.io/david/dev/fabsrc/graphql-schema-diff.svg?style=flat-square)](https://david-dm.org/fabsrc/graphql-schema-diff?type=dev)
 
-Returns the diff of two GraphQL schemas and detects dangerous and breaking changes.
+Returns the diff of two GraphQL schemas. Detects dangerous and breaking changes.
 
 ## Install
 
@@ -58,6 +58,7 @@ getDiff(currentSchemaLocation, newSchemaLocation)
     }
 
     console.log(result.diff);
+    console.log(result.diffNoColor);
     console.log(result.dangerousChanges);
     console.log(result.breakingChanges);
   });
