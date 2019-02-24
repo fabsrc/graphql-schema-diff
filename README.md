@@ -16,6 +16,7 @@ $ npm install -g graphql-schema-diff
 ## Usage
 
 ```sh
+$ graphql-schema-diff --help
 
   Returns the diff of two GraphQL schemas. Detects dangerous and breaking changes.
 
