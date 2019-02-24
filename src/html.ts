@@ -29,10 +29,6 @@ export async function createHtmlOutput(
 ): Promise<void> {
   const { outputDirectory = 'schemaDiff' } = options;
 
-  if (path.resolve(outputDirectory) === process.cwd()) {
-    throw new Error('Cannot write HTML output to current working directory');
-  }
-
   const adjustedDiff = diff
     .replace(/(---\s.*)\sremoved/, '$1')
     .replace(/(\+\+\+\s.*)\sadded/, '$1');
@@ -45,7 +41,6 @@ export async function createHtmlOutput(
     }
   });
   await fs.ensureDir(outputDirectory);
-  await fs.emptyDir(outputDirectory);
   const diff2HtmlPath = path.dirname(require.resolve('diff2html/package.json'));
   await fs.copy(path.join(diff2HtmlPath, 'dist'), outputDirectory);
   const htmlOutput = htmlTemplate(diffHtml);
