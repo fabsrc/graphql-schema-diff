@@ -16,23 +16,29 @@ import fetch from 'node-fetch';
 import disparity from 'disparity';
 import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
 
-async function fetchRemoteSchema(endpoint: string): Promise<GraphQLSchema> {
-  return fetch(endpoint, {
+interface Headers {
+  [key: string]: string;
+}
+
+async function fetchRemoteSchema(
+  endpoint: string,
+  headers?: Headers
+): Promise<GraphQLSchema> {
+  const res = await fetch(endpoint, {
     method: 'POST',
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      ...headers
     },
     body: JSON.stringify({ query: introspectionQuery })
-  })
-    .then(res => {
-      if (res.ok) {
-        return res;
-      }
+  });
 
-      throw new Error(`${res.status} - ${res.statusText} (${endpoint})`);
-    })
-    .then(res => res.json())
-    .then(({ data }: { data: IntrospectionQuery }) => buildClientSchema(data));
+  if (!res.ok) {
+    throw new Error(`${res.status} - ${res.statusText} (${endpoint})`);
+  }
+
+  const { data }: { data: IntrospectionQuery } = await res.json();
+  return buildClientSchema(data);
 }
 
 function readLocalSchema(schemaPath: string): GraphQLSchema {
@@ -51,9 +57,12 @@ function readLocalSchema(schemaPath: string): GraphQLSchema {
   }
 }
 
-async function getSchema(schemaLocation: string): Promise<GraphQLSchema> {
+async function getSchema(
+  schemaLocation: string,
+  options: { headers?: Headers } = {}
+): Promise<GraphQLSchema> {
   if (schemaLocation.match(/^https?/)) {
-    return fetchRemoteSchema(schemaLocation);
+    return fetchRemoteSchema(schemaLocation, options.headers);
   } else {
     return readLocalSchema(schemaLocation);
   }
@@ -66,13 +75,36 @@ export interface DiffResponse {
   breakingChanges: BreakingChange[];
 }
 
+export interface DiffOptions {
+  leftSchema?: {
+    headers?: Headers;
+  };
+  rightSchema?: {
+    headers?: Headers;
+  };
+  headers?: Headers;
+}
+
 export async function getDiff(
   schema1Location: string,
-  schema2Location: string
+  schema2Location: string,
+  options: DiffOptions = {}
 ): Promise<DiffResponse | undefined> {
+  const leftSchemaOptions = {
+    headers: {
+      ...options.headers,
+      ...(options.leftSchema && options.leftSchema.headers)
+    }
+  };
+  const rightSchemaOptions = {
+    headers: {
+      ...options.headers,
+      ...(options.leftSchema && options.leftSchema.headers)
+    }
+  };
   const [schema1, schema2] = await Promise.all([
-    getSchema(schema1Location),
-    getSchema(schema2Location)
+    getSchema(schema1Location, leftSchemaOptions),
+    getSchema(schema2Location, rightSchemaOptions)
   ]);
 
   if (!schema1 || !schema2) {
