@@ -16,7 +16,7 @@ import fetch from 'node-fetch';
 import disparity from 'disparity';
 import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
 
-interface Headers {
+export interface Headers {
   [key: string]: string;
 }
 
@@ -111,7 +111,10 @@ export async function getDiff(
     throw new Error('Schemas not defined');
   }
 
-  const [leftSchemaSDL, rightSchemaSDL] = [printSchema(leftSchema), printSchema(rightSchema)];
+  const [leftSchemaSDL, rightSchemaSDL] = [
+    printSchema(leftSchema),
+    printSchema(rightSchema)
+  ];
 
   if (leftSchemaSDL === rightSchemaSDL) {
     return;
