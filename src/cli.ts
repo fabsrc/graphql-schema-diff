@@ -8,7 +8,7 @@ import { getDiff } from '.';
 const cli = meow(
   `
   Usage
-    $ graphql-schema-diff <schema1Location> <schema2Location>
+    $ graphql-schema-diff <leftSchemaLocation> <rightSchemaLocation>
 
   Options
     --fail-on-dangerous-changes  Exit with error on dangerous changes
@@ -38,13 +38,13 @@ const cli = meow(
   }
 );
 
-const [schema1Location, schema2Location] = cli.input;
+const [leftSchemaLocation, rightSchemaLocation] = cli.input;
 
-if (!schema1Location || !schema2Location) {
+if (!leftSchemaLocation || !rightSchemaLocation) {
   throw new Error('Schema locations missing!');
 }
 
-getDiff(schema1Location, schema2Location)
+getDiff(leftSchemaLocation, rightSchemaLocation)
   .then(async result => {
     if (result === undefined) {
       console.log(chalk.green('✔ No changes'));

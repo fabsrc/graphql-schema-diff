@@ -86,8 +86,8 @@ export interface DiffOptions {
 }
 
 export async function getDiff(
-  schema1Location: string,
-  schema2Location: string,
+  leftSchemaLocation: string,
+  rightSchemaLocation: string,
   options: DiffOptions = {}
 ): Promise<DiffResponse | undefined> {
   const leftSchemaOptions = {
@@ -102,29 +102,29 @@ export async function getDiff(
       ...(options.leftSchema && options.leftSchema.headers)
     }
   };
-  const [schema1, schema2] = await Promise.all([
-    getSchema(schema1Location, leftSchemaOptions),
-    getSchema(schema2Location, rightSchemaOptions)
+  const [leftSchema, rightSchema] = await Promise.all([
+    getSchema(leftSchemaLocation, leftSchemaOptions),
+    getSchema(rightSchemaLocation, rightSchemaOptions)
   ]);
 
-  if (!schema1 || !schema2) {
+  if (!leftSchema || !rightSchema) {
     throw new Error('Schemas not defined');
   }
 
-  const [schema1SDL, schema2SDL] = [printSchema(schema1), printSchema(schema2)];
+  const [leftSchemaSDL, rightSchemaSDL] = [printSchema(leftSchema), printSchema(rightSchema)];
 
-  if (schema1SDL === schema2SDL) {
+  if (leftSchemaSDL === rightSchemaSDL) {
     return;
   }
 
-  const diff = disparity.unified(schema1SDL, schema2SDL, {
-    paths: [schema1Location, schema2Location]
+  const diff = disparity.unified(leftSchemaSDL, rightSchemaSDL, {
+    paths: [leftSchemaLocation, rightSchemaLocation]
   });
-  const diffNoColor = disparity.unifiedNoColor(schema1SDL, schema2SDL, {
-    paths: [schema1Location, schema2Location]
+  const diffNoColor = disparity.unifiedNoColor(leftSchemaSDL, rightSchemaSDL, {
+    paths: [leftSchemaLocation, rightSchemaLocation]
   });
-  const dangerousChanges = findDangerousChanges(schema1, schema2);
-  const breakingChanges = findBreakingChanges(schema1, schema2);
+  const dangerousChanges = findDangerousChanges(leftSchema, rightSchema);
+  const breakingChanges = findBreakingChanges(leftSchema, rightSchema);
 
   return {
     diff,

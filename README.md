@@ -21,7 +21,7 @@ $ graphql-schema-diff --help
   Returns the diff of two GraphQL schemas. Detects dangerous and breaking changes.
 
   Usage
-    $ graphql-schema-diff <schema1Location> <schema2Location>
+    $ graphql-schema-diff <leftSchemaLocation> <rightSchemaLocation>
 
   Options
     --fail-on-dangerous-changes  Exit with error on dangerous changes
