@@ -65,9 +65,13 @@ function parseHeaders(headerInput?: string | string[]): Headers | undefined {
     headers = [parseHeader(headerInput)];
   }
 
-  return headers
-    .filter(([key]) => key != null && key !== '')
-    .reduce((result, [key, value]) => ({ ...result, [key && key]: value }), {});
+  return headers.reduce(
+    (result, [key, value]) => ({
+      ...result,
+      ...(key && value && { [key]: value })
+    }),
+    {}
+  );
 }
 
 const [leftSchemaLocation, rightSchemaLocation]: string[] = cli.input;
