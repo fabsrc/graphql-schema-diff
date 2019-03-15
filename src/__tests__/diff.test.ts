@@ -116,6 +116,17 @@ describe('getDiff', () => {
       ).rejects.toThrow(`404 - Not Found (${testRemoteSchemaLocation})`);
     });
 
+    it('throws error on invalid response', () => {
+      nock(testRemoteSchemaLocation)
+        .post('', JSON.stringify({ query: introspectionQuery }))
+        .twice()
+        .reply(200, { invalid: 'response' });
+
+      return expect(
+        getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation)
+      ).rejects.toThrow(`Invalid response from GraphQL endpoint: ${testRemoteSchemaLocation}`);
+    });
+
     afterEach(() => {
       nock.cleanAll();
     });

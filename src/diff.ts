@@ -37,7 +37,7 @@ async function fetchRemoteSchema(
   }
 
   const responseBody = await res.json();
-  
+
   if (!responseBody || !responseBody.data || !responseBody.data.__schema) {
     throw new Error(`Invalid response from GraphQL endpoint: ${endpoint}`);
   }
