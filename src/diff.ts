@@ -6,7 +6,6 @@ import {
   introspectionQuery,
   buildClientSchema,
   buildSchema,
-  IntrospectionQuery,
   DangerousChange,
   BreakingChange
 } from 'graphql';
@@ -37,8 +36,13 @@ async function fetchRemoteSchema(
     throw new Error(`${res.status} - ${res.statusText} (${endpoint})`);
   }
 
-  const { data }: { data: IntrospectionQuery } = await res.json();
-  return buildClientSchema(data);
+  const responseBody = await res.json();
+  
+  if (!responseBody || !responseBody.data || !responseBody.data.__schema) {
+    throw new Error(`Invalid response from GraphQL endpoint: ${endpoint}`);
+  }
+
+  return buildClientSchema(responseBody.data);
 }
 
 function readLocalSchema(schemaPath: string): GraphQLSchema {
