@@ -99,7 +99,7 @@ export async function getDiff(
   const rightSchemaOptions = {
     headers: {
       ...options.headers,
-      ...(options.leftSchema && options.leftSchema.headers)
+      ...(options.rightSchema && options.rightSchema.headers)
     }
   };
   const [leftSchema, rightSchema] = await Promise.all([
