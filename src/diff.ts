@@ -3,11 +3,12 @@ import {
   findBreakingChanges,
   findDangerousChanges,
   GraphQLSchema,
-  introspectionQuery,
   buildClientSchema,
   buildSchema,
   DangerousChange,
-  BreakingChange
+  BreakingChange,
+  introspectionFromSchema,
+  getIntrospectionQuery
 } from 'graphql';
 import fs from 'fs';
 import isGlob from 'is-glob';
@@ -23,6 +24,7 @@ async function fetchRemoteSchema(
   endpoint: string,
   headers?: Headers
 ): Promise<GraphQLSchema> {
+  const introspectionQuery = getIntrospectionQuery({ descriptions: false });
   const res = await fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -46,6 +48,8 @@ async function fetchRemoteSchema(
 }
 
 function readLocalSchema(schemaPath: string): GraphQLSchema {
+  let schemaString: string;
+
   if (isGlob(schemaPath)) {
     const typesArray = fileLoader(schemaPath);
 
@@ -53,12 +57,14 @@ function readLocalSchema(schemaPath: string): GraphQLSchema {
       throw new Error(`No types found with glob pattern '${schemaPath}'`);
     }
 
-    const mergedSchema = mergeTypes(typesArray, { all: true });
-    return buildSchema(mergedSchema);
+    schemaString = mergeTypes(typesArray, { all: true });
   } else {
-    const schemaString = fs.readFileSync(schemaPath, 'utf8');
-    return buildSchema(schemaString);
+    schemaString = fs.readFileSync(schemaPath, 'utf8');
   }
+
+  const schema = buildSchema(schemaString);
+  const introspection = introspectionFromSchema(schema, { descriptions: false })
+  return buildClientSchema(introspection);
 }
 
 async function getSchema(

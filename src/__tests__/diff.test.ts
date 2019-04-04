@@ -1,12 +1,13 @@
 import nock from 'nock';
 import path from 'path';
 import { getDiff } from '../diff';
-import { introspectionQuery } from 'graphql';
+import { getIntrospectionQuery } from 'graphql';
 import introspectionResponse from './fixtures/introspectionResponse.json';
 
 describe('getDiff', () => {
   describe('remote schema fetching', () => {
     const testRemoteSchemaLocation = 'http://test/graphql';
+    const introspectionQuery = getIntrospectionQuery({ descriptions: false });
 
     it('fetches remote schema successfully', async () => {
       nock(testRemoteSchemaLocation)
