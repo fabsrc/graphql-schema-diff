@@ -36,7 +36,8 @@
     "is-glob": "^4.0.1",
     "meow": "^5.0.0",
     "merge-graphql-schemas": "^1.5.8",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.3.0",
+    "sort-graphql-schema": "^1.0.0"
   },
   "devDependencies": {
     "@types/diff2html": "0.0.4",

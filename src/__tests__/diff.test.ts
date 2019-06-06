@@ -221,4 +221,25 @@ describe('getDiff', () => {
       }
     });
   });
+
+  describe('schema sorting', () => {
+    it('returns diff between two unsorted, but otherwise equal schemas, when sorting not enabled', async () => {
+      const result = await getDiff(
+        path.join(__dirname, 'fixtures/localSchemaSorted.graphql'),
+        path.join(__dirname, 'fixtures/localSchemaUnsorted.graphql')
+      );
+
+      expect(result).toBeDefined();
+    });
+
+    it('returns nothing between two unsorted, but otherwise equal schemas, when sorting enabled', async () => {
+      const result = await getDiff(
+        path.join(__dirname, 'fixtures/localSchemaSorted.graphql'),
+        path.join(__dirname, 'fixtures/localSchemaUnsorted.graphql'),
+        { sort: true }
+      );
+
+      expect(result).toBeUndefined();
+    });
+  });
 });

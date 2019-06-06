@@ -18,6 +18,7 @@ const cli = meow(
     --header, -H  Header to send to all remote schema sources
     --left-schema-header  Header to send to left remote schema source
     --right-schema-header Header to send to right remote schema source
+    --sort, -s Sort schemas prior to diffing
 
   Examples
     $ graphql-schema-diff https://example.com/graphql schema.graphql
@@ -47,6 +48,10 @@ const cli = meow(
       },
       'right-schema-header': {
         type: 'string'
+      },
+      sort: {
+        type: 'boolean',
+        alias: 's'
       }
     }
   }
@@ -96,7 +101,8 @@ getDiff(leftSchemaLocation, rightSchemaLocation, {
   },
   rightSchema: {
     headers: parseHeaders(rightSchemaHeader)
-  }
+  },
+  sort: cli.flags.sort
 })
   .then(async result => {
     if (result === undefined) {

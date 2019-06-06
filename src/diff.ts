@@ -1,4 +1,5 @@
 import {
+  graphql,
   printSchema,
   findBreakingChanges,
   findDangerousChanges,
@@ -10,11 +11,13 @@ import {
   introspectionFromSchema,
   getIntrospectionQuery
 } from 'graphql';
+import { introspectionQuery } from 'graphql/utilities';
 import fs from 'fs';
 import isGlob from 'is-glob';
 import fetch from 'node-fetch';
 import disparity from 'disparity';
 import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
+import sortSchema from 'sort-graphql-schema';
 
 export interface Headers {
   [key: string]: string;
@@ -63,7 +66,9 @@ function readLocalSchema(schemaPath: string): GraphQLSchema {
   }
 
   const schema = buildSchema(schemaString);
-  const introspection = introspectionFromSchema(schema, { descriptions: false })
+  const introspection = introspectionFromSchema(schema, {
+    descriptions: false
+  });
   return buildClientSchema(introspection);
 }
 
@@ -93,6 +98,7 @@ export interface DiffOptions {
     headers?: Headers;
   };
   headers?: Headers;
+  sort?: boolean;
 }
 
 export async function getDiff(
@@ -112,13 +118,24 @@ export async function getDiff(
       ...(options.rightSchema && options.rightSchema.headers)
     }
   };
-  const [leftSchema, rightSchema] = await Promise.all([
+  let [leftSchema, rightSchema] = await Promise.all([
     getSchema(leftSchemaLocation, leftSchemaOptions),
     getSchema(rightSchemaLocation, rightSchemaOptions)
   ]);
 
   if (!leftSchema || !rightSchema) {
     throw new Error('Schemas not defined');
+  }
+
+  if (options.sort) {
+    [leftSchema, rightSchema] = [
+      buildClientSchema(
+        sortSchema(await graphql(leftSchema, introspectionQuery)).data
+      ),
+      buildClientSchema(
+        sortSchema(await graphql(rightSchema, introspectionQuery)).data
+      )
+    ];
   }
 
   const [leftSchemaSDL, rightSchemaSDL] = [
