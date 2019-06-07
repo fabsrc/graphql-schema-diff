@@ -236,7 +236,7 @@ describe('getDiff', () => {
       const result = await getDiff(
         path.join(__dirname, 'fixtures/localSchemaSorted.graphql'),
         path.join(__dirname, 'fixtures/localSchemaUnsorted.graphql'),
-        { sort: true }
+        { sortSchema: true }
       );
 
       expect(result).toBeUndefined();
