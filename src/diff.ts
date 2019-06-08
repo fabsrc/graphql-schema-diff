@@ -10,6 +10,7 @@ import {
   introspectionFromSchema,
   getIntrospectionQuery
 } from 'graphql';
+import { lexicographicSortSchema } from 'graphql/utilities';
 import fs from 'fs';
 import isGlob from 'is-glob';
 import fetch from 'node-fetch';
@@ -63,7 +64,9 @@ function readLocalSchema(schemaPath: string): GraphQLSchema {
   }
 
   const schema = buildSchema(schemaString);
-  const introspection = introspectionFromSchema(schema, { descriptions: false })
+  const introspection = introspectionFromSchema(schema, {
+    descriptions: false
+  });
   return buildClientSchema(introspection);
 }
 
@@ -93,6 +96,7 @@ export interface DiffOptions {
     headers?: Headers;
   };
   headers?: Headers;
+  sortSchema?: boolean;
 }
 
 export async function getDiff(
@@ -112,13 +116,20 @@ export async function getDiff(
       ...(options.rightSchema && options.rightSchema.headers)
     }
   };
-  const [leftSchema, rightSchema] = await Promise.all([
+  let [leftSchema, rightSchema] = await Promise.all([
     getSchema(leftSchemaLocation, leftSchemaOptions),
     getSchema(rightSchemaLocation, rightSchemaOptions)
   ]);
 
   if (!leftSchema || !rightSchema) {
     throw new Error('Schemas not defined');
+  }
+
+  if (options.sortSchema) {
+    [leftSchema, rightSchema] = [
+      lexicographicSortSchema(leftSchema),
+      lexicographicSortSchema(rightSchema)
+    ];
   }
 
   const [leftSchemaSDL, rightSchemaSDL] = [
