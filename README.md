@@ -31,6 +31,7 @@ $ graphql-schema-diff --help
     --header, -H  Header to send to all remote schema sources
     --left-schema-header  Header to send to left remote schema source
     --right-schema-header Header to send to right remote schema source
+    --sort-schema, -s Sort schemas prior to diffing
 
   Examples
     $ graphql-schema-diff https://example.com/graphql schema.graphql
