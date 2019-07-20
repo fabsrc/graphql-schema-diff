@@ -12,6 +12,10 @@
     "lint:fix": "prettier --parser typescript --single-quote --write src/**"
   },
   "bin": "dist/cli.js",
+  "files": [
+    "dist/",
+    "npm-shrinkwrap.json"
+  ],
   "keywords": [
     "graphql",
     "schema",

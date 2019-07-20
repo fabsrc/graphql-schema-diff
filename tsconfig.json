@@ -10,5 +10,7 @@
     "resolveJsonModule": true,
     "declaration": true,
     "noImplicitAny": true
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/__tests__"]
 }
