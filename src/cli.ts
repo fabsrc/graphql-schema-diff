@@ -91,7 +91,14 @@ const {
 } = cli.flags;
 
 if (!leftSchemaLocation || !rightSchemaLocation) {
-  throw new Error('Schema locations missing!');
+  console.error(
+    chalk.red('ERROR: Schema locations missing!\n\n'),
+    chalk.gray(
+      'Usage\n' +
+        '  $ graphql-schema-diff <leftSchemaLocation> <rightSchemaLocation>'
+    )
+  );
+  process.exit(1);
 }
 
 getDiff(leftSchemaLocation, rightSchemaLocation, {
