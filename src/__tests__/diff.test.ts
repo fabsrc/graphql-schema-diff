@@ -158,7 +158,9 @@ describe('getDiff', () => {
           path.join(__dirname, 'invalidLocation'),
           path.join(__dirname, 'invalidLocation')
         )
-      ).rejects.toThrow(/ENOENT/);
+      ).rejects.toThrow(
+        /Unable to find any GraphQL type definitions for the following pointers/
+      );
     });
 
     it('throws error on non-existent files in glob pattern', () => {
@@ -167,7 +169,9 @@ describe('getDiff', () => {
           path.join(__dirname, '/**/*.invalidgql'),
           path.join(__dirname, '/**/*.invalidgql')
         )
-      ).rejects.toThrow(/No types found with glob pattern '.*'/);
+      ).rejects.toThrow(
+        /Unable to find any GraphQL type definitions for the following pointer/
+      );
     });
   });
 

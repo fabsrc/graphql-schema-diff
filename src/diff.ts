@@ -4,18 +4,15 @@ import {
   findDangerousChanges,
   GraphQLSchema,
   buildClientSchema,
-  buildSchema,
   DangerousChange,
   BreakingChange,
   introspectionFromSchema,
   getIntrospectionQuery
 } from 'graphql';
 import { lexicographicSortSchema } from 'graphql/utilities';
-import fs from 'fs';
-import isGlob from 'is-glob';
 import fetch from 'node-fetch';
 import disparity from 'disparity';
-import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
+import { loadSchema } from 'graphql-toolkit';
 
 export interface Headers {
   [key: string]: string;
@@ -48,22 +45,8 @@ async function fetchRemoteSchema(
   return buildClientSchema(responseBody.data);
 }
 
-function readLocalSchema(schemaPath: string): GraphQLSchema {
-  let schemaString: string;
-
-  if (isGlob(schemaPath)) {
-    const typesArray = fileLoader(schemaPath);
-
-    if (typesArray.length === 0) {
-      throw new Error(`No types found with glob pattern '${schemaPath}'`);
-    }
-
-    schemaString = mergeTypes(typesArray, { all: true });
-  } else {
-    schemaString = fs.readFileSync(schemaPath, 'utf8');
-  }
-
-  const schema = buildSchema(schemaString);
+async function readLocalSchema(schemaPath: string): Promise<GraphQLSchema> {
+  const schema = await loadSchema(schemaPath);
   const introspection = introspectionFromSchema(schema, {
     descriptions: false
   });

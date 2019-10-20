@@ -33,31 +33,26 @@
   },
   "dependencies": {
     "chalk": "^2.4.2",
-    "diff2html": "^2.11.2",
+    "diff2html": "^2.12.1",
     "disparity": "^2.0.0",
     "fs-extra": "^8.1.0",
-    "graphql": "^14.4.2",
-    "is-glob": "^4.0.1",
+    "graphql": "^14.5.8",
+    "graphql-toolkit": "^0.5.17",
     "meow": "^5.0.0",
-    "merge-graphql-schemas": "^1.5.8",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "@types/diff2html": "0.0.5",
-    "@types/fs-extra": "^8.0.0",
-    "@types/graphql": "^14.2.2",
-    "@types/is-glob": "^4.0.1",
-    "@types/jest": "^24.0.15",
+    "@types/fs-extra": "^8.0.1",
+    "@types/jest": "^24.0.19",
     "@types/meow": "^5.0.0",
-    "@types/nock": "^10.0.3",
-    "@types/node": "^12.6.8",
-    "@types/node-fetch": "^2.3.7",
-    "jest": "^24.8.0",
-    "nock": "^10.0.6",
+    "@types/node": "^12.11.1",
+    "@types/node-fetch": "^2.5.2",
+    "jest": "^24.9.0",
+    "nock": "^11.4.0",
     "prettier": "^1.18.2",
-    "ts-jest": "^24.0.2",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.5.3"
+    "ts-jest": "^24.1.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
   },
   "jest": {
     "roots": [
