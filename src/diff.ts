@@ -2,67 +2,14 @@ import {
   printSchema,
   findBreakingChanges,
   findDangerousChanges,
-  GraphQLSchema,
-  buildClientSchema,
   DangerousChange,
-  BreakingChange,
-  introspectionFromSchema,
-  getIntrospectionQuery
+  BreakingChange
 } from 'graphql';
 import { lexicographicSortSchema } from 'graphql/utilities';
-import fetch from 'node-fetch';
 import disparity from 'disparity';
 import { loadSchema } from 'graphql-toolkit';
 
-export interface Headers {
-  [key: string]: string;
-}
-
-async function fetchRemoteSchema(
-  endpoint: string,
-  headers?: Headers
-): Promise<GraphQLSchema> {
-  const introspectionQuery = getIntrospectionQuery({ descriptions: false });
-  const res = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      ...headers
-    },
-    body: JSON.stringify({ query: introspectionQuery })
-  });
-
-  if (!res.ok) {
-    throw new Error(`${res.status} - ${res.statusText} (${endpoint})`);
-  }
-
-  const responseBody = await res.json();
-
-  if (!responseBody || !responseBody.data || !responseBody.data.__schema) {
-    throw new Error(`Invalid response from GraphQL endpoint: ${endpoint}`);
-  }
-
-  return buildClientSchema(responseBody.data);
-}
-
-async function readLocalSchema(schemaPath: string): Promise<GraphQLSchema> {
-  const schema = await loadSchema(schemaPath);
-  const introspection = introspectionFromSchema(schema, {
-    descriptions: false
-  });
-  return buildClientSchema(introspection);
-}
-
-async function getSchema(
-  schemaLocation: string,
-  options: { headers?: Headers } = {}
-): Promise<GraphQLSchema> {
-  if (schemaLocation.match(/^https?/)) {
-    return fetchRemoteSchema(schemaLocation, options.headers);
-  } else {
-    return readLocalSchema(schemaLocation);
-  }
-}
+export type Headers = Record<string, string>;
 
 export interface DiffResponse {
   diff: string;
@@ -100,8 +47,8 @@ export async function getDiff(
     }
   };
   let [leftSchema, rightSchema] = await Promise.all([
-    getSchema(leftSchemaLocation, leftSchemaOptions),
-    getSchema(rightSchemaLocation, rightSchemaOptions)
+    loadSchema(leftSchemaLocation, leftSchemaOptions),
+    loadSchema(rightSchemaLocation, rightSchemaOptions)
   ]);
 
   if (!leftSchema || !rightSchema) {
