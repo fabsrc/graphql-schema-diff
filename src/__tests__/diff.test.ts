@@ -5,7 +5,7 @@ import { getIntrospectionQuery } from 'graphql';
 import introspectionResponse from './fixtures/introspectionResponse.json';
 
 describe('getDiff', () => {
-  describe('remote schema fetching', () => {
+  describe.skip('remote schema fetching', () => {
     const testRemoteSchemaLocation = 'http://test/graphql';
     const introspectionQuery = getIntrospectionQuery();
 
@@ -106,7 +106,7 @@ describe('getDiff', () => {
       expect(result).toBeUndefined();
     });
 
-    it.skip('throws error on status codes other than 200', () => {
+    it('throws error on status codes other than 200', () => {
       nock(testRemoteSchemaLocation)
         .post('', JSON.stringify({ query: introspectionQuery }))
         .twice()
@@ -117,7 +117,7 @@ describe('getDiff', () => {
       ).rejects.toThrow(`404 - Not Found (${testRemoteSchemaLocation})`);
     });
 
-    it.skip('throws error on invalid response', () => {
+    it('throws error on invalid response', () => {
       nock(testRemoteSchemaLocation)
         .post('', JSON.stringify({ query: introspectionQuery }))
         .twice()
