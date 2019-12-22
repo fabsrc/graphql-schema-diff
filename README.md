@@ -25,19 +25,20 @@ $ graphql-schema-diff --help
 
   Options
     --fail-on-dangerous-changes  Exit with error on dangerous changes
-    --fail-on-breaking-changes  Exit with error on breaking changes
-    --fail-on-all-changes  Exit with error on all changes
-    --use-colors Use colors for diff terminal output
-    --create-html-output  Creates an HTML file containing the diff
-    --html-output-directory  Directory where the HTML file should be stored (Default: './schemaDiff')
-    --header, -H  Header to send to all remote schema sources
-    --left-schema-header  Header to send to left remote schema source
-    --right-schema-header Header to send to right remote schema source
-    --sort-schema, -s Sort schemas prior to diffing
+    --fail-on-breaking-changes   Exit with error on breaking changes
+    --fail-on-all-changes        Exit with error on all changes
+    --use-colors                 Use colors for diff terminal output
+    --create-html-output         Creates an HTML file containing the diff
+    --html-output-directory      Directory where the HTML file should be stored (Default: './schemaDiff')
+    --header, -H                 Header to send to all remote schema sources
+    --left-schema-header         Header to send to left remote schema source
+    --right-schema-header        Header to send to right remote schema source
+    --sort-schema, -s            Sort schemas prior to diffing
 
   Examples
     $ graphql-schema-diff https://example.com/graphql schema.graphql
     $ graphql-schema-diff https://example.com/graphql schema.graphql -H 'Authorization: Bearer 123'
+
 ```
 
 Schema locations can be:
