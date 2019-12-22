@@ -163,7 +163,7 @@ getDiff(leftSchemaLocation, rightSchemaLocation, {
     if (
       (hasDangerousChanges && cli.flags.failOnDangerousChanges) ||
       (hasBreakingChanges && cli.flags.failOnBreakingChanges) ||
-      cli.flags.failOnChanges
+      cli.flags.failOnAllChanges
     ) {
       process.exit(1);
       return;
