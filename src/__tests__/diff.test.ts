@@ -7,11 +7,11 @@ import introspectionResponse from './fixtures/introspectionResponse.json';
 describe('getDiff', () => {
   describe('remote schema fetching', () => {
     const testRemoteSchemaLocation = 'http://test/graphql';
-    const introspectionQuery = getIntrospectionQuery({ descriptions: false });
+    const introspectionQuery = getIntrospectionQuery();
 
     it('fetches remote schema successfully', async () => {
       nock(testRemoteSchemaLocation)
-        .post('', JSON.stringify({ query: introspectionQuery }))
+        .post(/.*/, JSON.stringify({ query: introspectionQuery }))
         .twice()
         .reply(200, introspectionResponse);
 
@@ -25,7 +25,7 @@ describe('getDiff', () => {
     it('fetches remote schemas with headers', async () => {
       nock(testRemoteSchemaLocation)
         .matchHeader('test', 'test')
-        .post('', JSON.stringify({ query: introspectionQuery }))
+        .post(/.*/, JSON.stringify({ query: introspectionQuery }))
         .twice()
         .reply(200, introspectionResponse);
 
@@ -45,11 +45,11 @@ describe('getDiff', () => {
       const testRemoteRightSchemaLocation = 'http://testRight/graphql';
       nock(testRemoteSchemaLocation)
         .matchHeader('test', 'left')
-        .post('', JSON.stringify({ query: introspectionQuery }))
+        .post(/.*/, JSON.stringify({ query: introspectionQuery }))
         .reply(200, introspectionResponse);
       nock(testRemoteRightSchemaLocation)
         .matchHeader('test', 'right')
-        .post('', JSON.stringify({ query: introspectionQuery }))
+        .post(/.*/, JSON.stringify({ query: introspectionQuery }))
         .reply(200, introspectionResponse);
 
       const result = await getDiff(
@@ -76,12 +76,12 @@ describe('getDiff', () => {
       nock(testRemoteSchemaLocation)
         .matchHeader('global', 'merged')
         .matchHeader('test', 'left')
-        .post('', JSON.stringify({ query: introspectionQuery }))
+        .post(/.*/, JSON.stringify({ query: introspectionQuery }))
         .reply(200, introspectionResponse);
       nock(testRemoteRightSchemaLocation)
         .matchHeader('global', 'merged')
         .matchHeader('test', 'right')
-        .post('', JSON.stringify({ query: introspectionQuery }))
+        .post(/.*/, JSON.stringify({ query: introspectionQuery }))
         .reply(200, introspectionResponse);
 
       const result = await getDiff(
@@ -108,24 +108,24 @@ describe('getDiff', () => {
 
     it('throws error on status codes other than 200', () => {
       nock(testRemoteSchemaLocation)
-        .post('', JSON.stringify({ query: introspectionQuery }))
+        .post(/.*/, JSON.stringify({ query: introspectionQuery }))
         .twice()
-        .reply(404);
+        .reply(404, {});
 
       return expect(
         getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation)
-      ).rejects.toThrow(`404 - Not Found (${testRemoteSchemaLocation})`);
+      ).rejects.toThrow(/Unable to download schema from remote/);
     });
 
     it('throws error on invalid response', () => {
       nock(testRemoteSchemaLocation)
-        .post('', JSON.stringify({ query: introspectionQuery }))
+        .post(/.*/, JSON.stringify({ query: introspectionQuery }))
         .twice()
         .reply(200, { invalid: 'response' });
 
       return expect(
         getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation)
-      ).rejects.toThrow(`Invalid response from GraphQL endpoint: ${testRemoteSchemaLocation}`);
+      ).rejects.toThrow(/Unable to download schema from remote/);
     });
 
     afterEach(() => {
@@ -158,7 +158,9 @@ describe('getDiff', () => {
           path.join(__dirname, 'invalidLocation'),
           path.join(__dirname, 'invalidLocation')
         )
-      ).rejects.toThrow(/ENOENT/);
+      ).rejects.toThrow(
+        /Unable to find any GraphQL type definitions for the following pointers/
+      );
     });
 
     it('throws error on non-existent files in glob pattern', () => {
@@ -167,7 +169,9 @@ describe('getDiff', () => {
           path.join(__dirname, '/**/*.invalidgql'),
           path.join(__dirname, '/**/*.invalidgql')
         )
-      ).rejects.toThrow(/No types found with glob pattern '.*'/);
+      ).rejects.toThrow(
+        /Unable to find any GraphQL type definitions for the following pointer/
+      );
     });
   });
 

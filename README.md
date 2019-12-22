@@ -25,13 +25,15 @@ $ graphql-schema-diff --help
 
   Options
     --fail-on-dangerous-changes  Exit with error on dangerous changes
-    --ignore-breaking-changes  Do not exit with error on breaking changes
-    --create-html-output  Creates an HTML file containing the diff
-    --html-output-directory  Directory where the HTML file should be stored (Default: './schemaDiff')
-    --header, -H  Header to send to all remote schema sources
-    --left-schema-header  Header to send to left remote schema source
-    --right-schema-header Header to send to right remote schema source
-    --sort-schema, -s Sort schemas prior to diffing
+    --fail-on-breaking-changes   Exit with error on breaking changes
+    --fail-on-all-changes        Exit with error on all changes
+    --use-colors                 Use colors for diff terminal output
+    --create-html-output         Creates an HTML file containing the diff
+    --html-output-directory      Directory where the HTML file should be stored (Default: './schemaDiff')
+    --header, -H                 Header to send to all remote schema sources
+    --left-schema-header         Header to send to left remote schema source
+    --right-schema-header        Header to send to right remote schema source
+    --sort-schema, -s            Sort schemas prior to diffing
 
   Examples
     $ graphql-schema-diff https://example.com/graphql schema.graphql
@@ -69,3 +71,9 @@ getDiff(currentSchemaLocation, newSchemaLocation)
     console.log(result.breakingChanges);
   });
 ```
+
+
+## Related Packages
+
+* [GraphQL Inspector](https://github.com/kamilkisiela/graphql-inspector) ouputs a list of changes between two GraphQL schemas.
+* [GraphQL Toolkit](https://github.com/ardatan/graphql-toolkit) provides a set of utils for faster development of GraphQL tools.

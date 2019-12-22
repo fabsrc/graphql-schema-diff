@@ -12,13 +12,15 @@ const cli = meow(
 
   Options
     --fail-on-dangerous-changes  Exit with error on dangerous changes
-    --ignore-breaking-changes  Do not exit with error on breaking changes
-    --create-html-output  Creates an HTML file containing the diff
-    --html-output-directory  Directory where the HTML file should be stored (Default: './schemaDiff')
-    --header, -H  Header to send to all remote schema sources
-    --left-schema-header  Header to send to left remote schema source
-    --right-schema-header Header to send to right remote schema source
-    --sort-schema, -s Sort schemas prior to diffing
+    --fail-on-breaking-changes \t Exit with error on breaking changes
+    --fail-on-all-changes \t Exit with error on all changes
+    --use-colors \t\t Use colors for diff terminal output
+    --create-html-output \t Creates an HTML file containing the diff
+    --html-output-directory \t Directory where the HTML file should be stored (Default: './schemaDiff')
+    --header, -H \t\t Header to send to all remote schema sources
+    --left-schema-header \t Header to send to left remote schema source
+    --right-schema-header \t Header to send to right remote schema source
+    --sort-schema, -s \t\t Sort schemas prior to diffing
 
   Examples
     $ graphql-schema-diff https://example.com/graphql schema.graphql
@@ -26,32 +28,38 @@ const cli = meow(
 `,
   {
     flags: {
-      'fail-on-dangerous-changes': {
-        type: 'boolean'
+      "fail-on-dangerous-changes": {
+        type: "boolean"
       },
-      'ignore-breaking-changes': {
-        type: 'boolean'
+      "fail-on-breaking-changes": {
+        type: "boolean"
       },
-      'create-html-output': {
-        type: 'boolean'
+      "fail-on-all-changes": {
+        type: "boolean"
       },
-      'html-output-directory': {
-        type: 'string',
-        default: 'schemaDiff'
+      "use-colors": {
+        type: "boolean"
+      },
+      "create-html-output": {
+        type: "boolean"
+      },
+      "html-output-directory": {
+        type: "string",
+        default: "schemaDiff"
       },
       header: {
-        type: 'string',
-        alias: 'H'
+        type: "string",
+        alias: "H"
       },
-      'left-schema-header': {
-        type: 'string'
+      "left-schema-header": {
+        type: "string"
       },
-      'right-schema-header': {
-        type: 'string'
+      "right-schema-header": {
+        type: "string"
       },
-      'sort-schema': {
-        type: 'boolean',
-        alias: 's'
+      "sort-schema": {
+        type: "boolean",
+        alias: "s"
       }
     }
   }
@@ -109,48 +117,53 @@ getDiff(leftSchemaLocation, rightSchemaLocation, {
   rightSchema: {
     headers: parseHeaders(rightSchemaHeader)
   },
-  sortSchema: cli.flags.sortSchema
+  sortSchema: cli.flags.sortSchema as boolean
 })
   .then(async result => {
     if (result === undefined) {
-      console.log(chalk.green('✔ No changes'));
+      console.warn(chalk.green('✔ No changes'));
       return;
     }
 
     const hasBreakingChanges = result.breakingChanges.length !== 0;
     const hasDangerousChanges = result.dangerousChanges.length !== 0;
 
-    console.log(result.diff);
+    if (cli.flags.useColors) {
+      console.log(result.diff);
+    } else {
+      console.log(result.diffNoColor);
+    }
 
     if (hasDangerousChanges) {
-      console.log(chalk.yellow.bold.underline('Dangerous changes:'));
+      console.warn(chalk.yellow.bold.underline('Dangerous changes'));
 
       for (const change of result.dangerousChanges) {
-        console.log(chalk.yellow('  ⚠ ' + change.description));
+        console.warn(chalk.yellow('  ⚠ ' + change.description));
       }
     }
 
     if (hasDangerousChanges && hasBreakingChanges) {
-      console.log(); // Add additional line break
+      console.warn(); // Add additional line break
     }
 
     if (hasBreakingChanges) {
-      console.log(chalk.red.bold.underline('BREAKING CHANGES:'));
+      console.warn(chalk.red.bold.underline('BREAKING CHANGES'));
 
       for (const change of result.breakingChanges) {
-        console.log(chalk.red('  ✖ ' + change.description));
+        console.warn(chalk.red('  ✖ ' + change.description));
       }
     }
 
     if (cli.flags.createHtmlOutput) {
       await createHtmlOutput(result.diffNoColor, {
-        outputDirectory: cli.flags.htmlOutputDirectory
+        outputDirectory: cli.flags.htmlOutputDirectory as string | undefined
       });
     }
 
     if (
       (hasDangerousChanges && cli.flags.failOnDangerousChanges) ||
-      (hasBreakingChanges && !cli.flags.ignoreBreakingChanges)
+      (hasBreakingChanges && cli.flags.failOnBreakingChanges) ||
+      cli.flags.failOnAllChanges
     ) {
       process.exit(1);
       return;

@@ -2,84 +2,14 @@ import {
   printSchema,
   findBreakingChanges,
   findDangerousChanges,
-  GraphQLSchema,
-  buildClientSchema,
-  buildSchema,
   DangerousChange,
-  BreakingChange,
-  introspectionFromSchema,
-  getIntrospectionQuery
+  BreakingChange
 } from 'graphql';
 import { lexicographicSortSchema } from 'graphql/utilities';
-import fs from 'fs';
-import isGlob from 'is-glob';
-import fetch from 'node-fetch';
 import disparity from 'disparity';
-import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
+import { loadSchema } from 'graphql-toolkit';
 
-export interface Headers {
-  [key: string]: string;
-}
-
-async function fetchRemoteSchema(
-  endpoint: string,
-  headers?: Headers
-): Promise<GraphQLSchema> {
-  const introspectionQuery = getIntrospectionQuery({ descriptions: false });
-  const res = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      ...headers
-    },
-    body: JSON.stringify({ query: introspectionQuery })
-  });
-
-  if (!res.ok) {
-    throw new Error(`${res.status} - ${res.statusText} (${endpoint})`);
-  }
-
-  const responseBody = await res.json();
-
-  if (!responseBody || !responseBody.data || !responseBody.data.__schema) {
-    throw new Error(`Invalid response from GraphQL endpoint: ${endpoint}`);
-  }
-
-  return buildClientSchema(responseBody.data);
-}
-
-function readLocalSchema(schemaPath: string): GraphQLSchema {
-  let schemaString: string;
-
-  if (isGlob(schemaPath)) {
-    const typesArray = fileLoader(schemaPath);
-
-    if (typesArray.length === 0) {
-      throw new Error(`No types found with glob pattern '${schemaPath}'`);
-    }
-
-    schemaString = mergeTypes(typesArray, { all: true });
-  } else {
-    schemaString = fs.readFileSync(schemaPath, 'utf8');
-  }
-
-  const schema = buildSchema(schemaString);
-  const introspection = introspectionFromSchema(schema, {
-    descriptions: false
-  });
-  return buildClientSchema(introspection);
-}
-
-async function getSchema(
-  schemaLocation: string,
-  options: { headers?: Headers } = {}
-): Promise<GraphQLSchema> {
-  if (schemaLocation.match(/^https?/)) {
-    return fetchRemoteSchema(schemaLocation, options.headers);
-  } else {
-    return readLocalSchema(schemaLocation);
-  }
-}
+export type Headers = Record<string, string>;
 
 export interface DiffResponse {
   diff: string;
@@ -108,17 +38,19 @@ export async function getDiff(
     headers: {
       ...options.headers,
       ...(options.leftSchema && options.leftSchema.headers)
-    }
+    },
+    skipGraphQLImport: false
   };
   const rightSchemaOptions = {
     headers: {
       ...options.headers,
       ...(options.rightSchema && options.rightSchema.headers)
-    }
+    },
+    skipGraphQLImport: false
   };
   let [leftSchema, rightSchema] = await Promise.all([
-    getSchema(leftSchemaLocation, leftSchemaOptions),
-    getSchema(rightSchemaLocation, rightSchemaOptions)
+    loadSchema(leftSchemaLocation, leftSchemaOptions),
+    loadSchema(rightSchemaLocation, rightSchemaOptions)
   ]);
 
   if (!leftSchema || !rightSchema) {
