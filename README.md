@@ -70,3 +70,9 @@ getDiff(currentSchemaLocation, newSchemaLocation)
     console.log(result.breakingChanges);
   });
 ```
+
+
+## Related Packages
+
+* [GraphQL Inspector](https://github.com/kamilkisiela/graphql-inspector) ouputs a list of changes between two GraphQL schemas.
+* [GraphQL Toolkit](https://github.com/ardatan/graphql-toolkit) provides a set of utils for faster development of GraphQL tools.
