@@ -42,15 +42,15 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^8.0.1",
-    "@types/jest": "^24.0.23",
+    "@types/jest": "^24.0.24",
     "@types/meow": "^5.0.0",
-    "@types/node": "^12.12.14",
+    "@types/node": "^12.12.21",
     "jest": "^24.9.0",
     "nock": "^11.7.0",
     "prettier": "^1.19.1",
     "ts-jest": "^24.2.0",
     "ts-node": "^8.5.4",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.4"
   },
   "jest": {
     "roots": [
