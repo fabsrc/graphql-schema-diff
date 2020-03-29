@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import meow from 'meow';
-import chalk from 'chalk';
-import { createHtmlOutput } from './html';
-import { getDiff, Headers } from './diff';
+import meow from "meow";
+import chalk from "chalk";
+import { createHtmlOutput } from "./html";
+import { getDiff, Headers } from "./diff";
 
 const cli = meow(
   `
@@ -29,46 +29,46 @@ const cli = meow(
   {
     flags: {
       "fail-on-dangerous-changes": {
-        type: "boolean"
+        type: "boolean",
       },
       "fail-on-breaking-changes": {
-        type: "boolean"
+        type: "boolean",
       },
       "fail-on-all-changes": {
-        type: "boolean"
+        type: "boolean",
       },
       "use-colors": {
-        type: "boolean"
+        type: "boolean",
       },
       "create-html-output": {
-        type: "boolean"
+        type: "boolean",
       },
       "html-output-directory": {
         type: "string",
-        default: "schemaDiff"
+        default: "schemaDiff",
       },
       header: {
         type: "string",
-        alias: "H"
+        alias: "H",
       },
       "left-schema-header": {
-        type: "string"
+        type: "string",
       },
       "right-schema-header": {
-        type: "string"
+        type: "string",
       },
       "sort-schema": {
         type: "boolean",
-        alias: "s"
-      }
-    }
+        alias: "s",
+      },
+    },
   }
 );
 
 function parseHeaders(headerInput?: string | string[]): Headers | undefined {
   let headers: string[][];
   const parseHeader = (header: string): string[] =>
-    header.split(':').map((val: string) => val.trim());
+    header.split(":").map((val: string) => val.trim());
 
   if (!headerInput) return;
 
@@ -81,7 +81,7 @@ function parseHeaders(headerInput?: string | string[]): Headers | undefined {
   return headers.reduce(
     (result, [key, value]) => ({
       ...result,
-      ...(key && value && { [key]: value })
+      ...(key && value && { [key]: value }),
     }),
     {}
   );
@@ -91,7 +91,7 @@ const [leftSchemaLocation, rightSchemaLocation]: string[] = cli.input;
 const {
   header,
   leftSchemaHeader,
-  rightSchemaHeader
+  rightSchemaHeader,
 }: {
   header?: string | string[];
   leftSchemaHeader?: string | string[];
@@ -100,10 +100,10 @@ const {
 
 if (!leftSchemaLocation || !rightSchemaLocation) {
   console.error(
-    chalk.red('ERROR: Schema locations missing!\n\n'),
+    chalk.red("ERROR: Schema locations missing!\n\n"),
     chalk.gray(
-      'Usage\n' +
-        '  $ graphql-schema-diff <leftSchemaLocation> <rightSchemaLocation>'
+      "Usage\n" +
+        "  $ graphql-schema-diff <leftSchemaLocation> <rightSchemaLocation>"
     )
   );
   process.exit(1);
@@ -112,16 +112,16 @@ if (!leftSchemaLocation || !rightSchemaLocation) {
 getDiff(leftSchemaLocation, rightSchemaLocation, {
   headers: parseHeaders(header),
   leftSchema: {
-    headers: parseHeaders(leftSchemaHeader)
+    headers: parseHeaders(leftSchemaHeader),
   },
   rightSchema: {
-    headers: parseHeaders(rightSchemaHeader)
+    headers: parseHeaders(rightSchemaHeader),
   },
-  sortSchema: cli.flags.sortSchema as boolean
+  sortSchema: cli.flags.sortSchema as boolean,
 })
-  .then(async result => {
+  .then(async (result) => {
     if (result === undefined) {
-      console.warn(chalk.green('✔ No changes'));
+      console.warn(chalk.green("✔ No changes"));
       return;
     }
 
@@ -135,10 +135,10 @@ getDiff(leftSchemaLocation, rightSchemaLocation, {
     }
 
     if (hasDangerousChanges) {
-      console.warn(chalk.yellow.bold.underline('Dangerous changes'));
+      console.warn(chalk.yellow.bold.underline("Dangerous changes"));
 
       for (const change of result.dangerousChanges) {
-        console.warn(chalk.yellow('  ⚠ ' + change.description));
+        console.warn(chalk.yellow("  ⚠ " + change.description));
       }
     }
 
@@ -147,16 +147,16 @@ getDiff(leftSchemaLocation, rightSchemaLocation, {
     }
 
     if (hasBreakingChanges) {
-      console.warn(chalk.red.bold.underline('BREAKING CHANGES'));
+      console.warn(chalk.red.bold.underline("BREAKING CHANGES"));
 
       for (const change of result.breakingChanges) {
-        console.warn(chalk.red('  ✖ ' + change.description));
+        console.warn(chalk.red("  ✖ " + change.description));
       }
     }
 
     if (cli.flags.createHtmlOutput) {
       await createHtmlOutput(result.diffNoColor, {
-        outputDirectory: cli.flags.htmlOutputDirectory as string | undefined
+        outputDirectory: cli.flags.htmlOutputDirectory as string | undefined,
       });
     }
 
@@ -169,7 +169,7 @@ getDiff(leftSchemaLocation, rightSchemaLocation, {
       return;
     }
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(chalk.red(`\nERROR: ${err.message}`));
     process.exit(1);
   });

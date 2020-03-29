@@ -1,1 +1,1 @@
-export { getDiff } from './diff';
+export { getDiff } from "./diff";

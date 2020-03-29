@@ -3,7 +3,7 @@ import {
   findBreakingChanges,
   findDangerousChanges,
   DangerousChange,
-  BreakingChange
+  BreakingChange,
 } from "graphql";
 import { lexicographicSortSchema } from "graphql/utilities";
 import disparity from "disparity";
@@ -40,26 +40,26 @@ export async function getDiff(
   const leftSchemaOptions = {
     headers: {
       ...options.headers,
-      ...(options.leftSchema && options.leftSchema.headers)
+      ...(options.leftSchema && options.leftSchema.headers),
     },
-    skipGraphQLImport: false
+    skipGraphQLImport: false,
   };
   const rightSchemaOptions = {
     headers: {
       ...options.headers,
-      ...(options.rightSchema && options.rightSchema.headers)
+      ...(options.rightSchema && options.rightSchema.headers),
     },
-    skipGraphQLImport: false
+    skipGraphQLImport: false,
   };
   let [leftSchema, rightSchema] = await Promise.all([
     loadSchema(leftSchemaLocation, {
       loaders: [new UrlLoader(), new JsonFileLoader(), new GraphQLFileLoader()],
-      ...leftSchemaOptions
+      ...leftSchemaOptions,
     }),
     loadSchema(rightSchemaLocation, {
       loaders: [new UrlLoader(), new JsonFileLoader(), new GraphQLFileLoader()],
-      ...rightSchemaOptions
-    })
+      ...rightSchemaOptions,
+    }),
   ]);
 
   if (!leftSchema || !rightSchema) {
@@ -69,13 +69,13 @@ export async function getDiff(
   if (options.sortSchema) {
     [leftSchema, rightSchema] = [
       lexicographicSortSchema(leftSchema),
-      lexicographicSortSchema(rightSchema)
+      lexicographicSortSchema(rightSchema),
     ];
   }
 
   const [leftSchemaSDL, rightSchemaSDL] = [
     printSchema(leftSchema),
-    printSchema(rightSchema)
+    printSchema(rightSchema),
   ];
 
   if (leftSchemaSDL === rightSchemaSDL) {
@@ -83,10 +83,10 @@ export async function getDiff(
   }
 
   const diff = disparity.unified(leftSchemaSDL, rightSchemaSDL, {
-    paths: [leftSchemaLocation, rightSchemaLocation]
+    paths: [leftSchemaLocation, rightSchemaLocation],
   });
   const diffNoColor = disparity.unifiedNoColor(leftSchemaSDL, rightSchemaSDL, {
-    paths: [leftSchemaLocation, rightSchemaLocation]
+    paths: [leftSchemaLocation, rightSchemaLocation],
   });
   const dangerousChanges = findDangerousChanges(leftSchema, rightSchema);
   const breakingChanges = findBreakingChanges(leftSchema, rightSchema);
@@ -95,6 +95,6 @@ export async function getDiff(
     diff,
     diffNoColor,
     dangerousChanges,
-    breakingChanges
+    breakingChanges,
   };
 }

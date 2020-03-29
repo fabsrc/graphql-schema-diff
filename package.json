@@ -9,7 +9,7 @@
     "dev": "ts-node --files src/cli",
     "prepack": "npm run build",
     "test": "jest",
-    "lint:fix": "prettier --write src/**"
+    "fmt": "prettier --write src/**"
   },
   "bin": "dist/cli.js",
   "files": [

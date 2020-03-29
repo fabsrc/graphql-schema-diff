@@ -1,6 +1,6 @@
-import path from 'path';
-import fs from 'fs-extra';
-import { Diff2Html } from 'diff2html';
+import path from "path";
+import fs from "fs-extra";
+import { Diff2Html } from "diff2html";
 
 const htmlTemplate = (diffHtml: string): string => `<html>
 <head>
@@ -27,22 +27,22 @@ export async function createHtmlOutput(
   diff: string,
   options: Options = {}
 ): Promise<void> {
-  const { outputDirectory = 'schemaDiff' } = options;
+  const { outputDirectory = "schemaDiff" } = options;
 
   const adjustedDiff = diff
-    .replace(/(---\s.*)\sremoved/, '$1')
-    .replace(/(\+\+\+\s.*)\sadded/, '$1');
+    .replace(/(---\s.*)\sremoved/, "$1")
+    .replace(/(\+\+\+\s.*)\sadded/, "$1");
   const diffHtml = Diff2Html.getPrettyHtml(adjustedDiff, {
-    inputFormat: 'diff',
-    matching: 'lines',
-    outputFormat: 'side-by-side',
+    inputFormat: "diff",
+    matching: "lines",
+    outputFormat: "side-by-side",
     rawTemplates: {
-      'tag-file-renamed': ''
-    }
+      "tag-file-renamed": "",
+    },
   });
   await fs.ensureDir(outputDirectory);
-  const diff2HtmlPath = path.dirname(require.resolve('diff2html/package.json'));
-  await fs.copy(path.join(diff2HtmlPath, 'dist'), outputDirectory);
+  const diff2HtmlPath = path.dirname(require.resolve("diff2html/package.json"));
+  await fs.copy(path.join(diff2HtmlPath, "dist"), outputDirectory);
   const htmlOutput = htmlTemplate(diffHtml);
-  await fs.writeFile(path.join(outputDirectory, 'index.html'), htmlOutput);
+  await fs.writeFile(path.join(outputDirectory, "index.html"), htmlOutput);
 }

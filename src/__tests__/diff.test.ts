@@ -10,7 +10,7 @@ describe("getDiff", () => {
     const introspectionQueryBody = JSON.stringify({
       query: print(parse(getIntrospectionQuery({ descriptions: true }))),
       variables: {},
-      operationName: "IntrospectionQuery"
+      operationName: "IntrospectionQuery",
     });
 
     it("fetches remote schema successfully", async () => {
@@ -38,8 +38,8 @@ describe("getDiff", () => {
         testRemoteSchemaLocation,
         {
           headers: {
-            Test: "test"
-          }
+            Test: "test",
+          },
         }
       );
       expect(result).toBeUndefined();
@@ -62,14 +62,14 @@ describe("getDiff", () => {
         {
           leftSchema: {
             headers: {
-              Test: "left"
-            }
+              Test: "left",
+            },
           },
           rightSchema: {
             headers: {
-              Test: "right"
-            }
-          }
+              Test: "right",
+            },
+          },
         }
       );
       expect(result).toBeUndefined();
@@ -93,18 +93,18 @@ describe("getDiff", () => {
         testRemoteRightSchemaLocation,
         {
           headers: {
-            Global: "merged"
+            Global: "merged",
           },
           leftSchema: {
             headers: {
-              Test: "left"
-            }
+              Test: "left",
+            },
           },
           rightSchema: {
             headers: {
-              Test: "right"
-            }
-          }
+              Test: "right",
+            },
+          },
         }
       );
       expect(result).toBeUndefined();
@@ -205,8 +205,8 @@ describe("getDiff", () => {
         expect(result.dangerousChanges).toEqual([
           {
             description: "SECOND_VALUE was added to enum type TestEnum.",
-            type: "VALUE_ADDED_TO_ENUM"
-          }
+            type: "VALUE_ADDED_TO_ENUM",
+          },
         ]);
       }
     });
@@ -223,8 +223,8 @@ describe("getDiff", () => {
         expect(result.breakingChanges).toEqual([
           {
             description: "Query.test changed type from String to Int.",
-            type: "FIELD_CHANGED_KIND"
-          }
+            type: "FIELD_CHANGED_KIND",
+          },
         ]);
       }
     });
