@@ -640,6 +640,12 @@
         "@types/node": "*"
       }
     },
+    "@types/hogan.js": {
+      "version": "3.0.0",
+      "resolved": "https://registry.npmjs.org/@types/hogan.js/-/hogan.js-3.0.0.tgz",
+      "integrity": "sha512-djkvb/AN43c3lIGCojNQ1FBS9VqqKhcTns5RQnHw4xBT/csy0jAssAsOiJ8NfaaioZaeKYE7XkVRxE5NeSZcaA==",
+      "dev": true
+    },
     "@types/istanbul-lib-coverage": {
       "version": "2.0.1",
       "resolved": "https://registry.npmjs.org/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.1.tgz",
