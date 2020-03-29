@@ -1,14 +1,14 @@
 import path from "path";
 import fs from "fs-extra";
-import { Diff2Html } from "diff2html";
+import { html } from "diff2html";
 
 const htmlTemplate = (diffHtml: string): string => `<html>
 <head>
   <title>GraphQL Schema Diff</title>
   <meta charset="utf-8" /> 
-  <link rel="stylesheet" href="diff2html.css">
-  <script src="diff2html.js"></script>
-  <script src="diff2html-ui.js"></script>
+  <link rel="stylesheet" href="css/diff2html.min.css">
+  <script src="js/diff2html.min.js"></script>
+  <script src="js/diff2html-ui.min.js"></script>
   <style>
     html { box-sizing: border-box; }
     *,*:before,*:after { box-sizing: inherit; }
@@ -32,8 +32,7 @@ export async function createHtmlOutput(
   const adjustedDiff = diff
     .replace(/(---\s.*)\sremoved/, "$1")
     .replace(/(\+\+\+\s.*)\sadded/, "$1");
-  const diffHtml = Diff2Html.getPrettyHtml(adjustedDiff, {
-    inputFormat: "diff",
+  const diffHtml = html(adjustedDiff, {
     matching: "lines",
     outputFormat: "side-by-side",
     rawTemplates: {
@@ -42,7 +41,7 @@ export async function createHtmlOutput(
   });
   await fs.ensureDir(outputDirectory);
   const diff2HtmlPath = path.dirname(require.resolve("diff2html/package.json"));
-  await fs.copy(path.join(diff2HtmlPath, "dist"), outputDirectory);
+  await fs.copy(path.join(diff2HtmlPath, "bundles"), outputDirectory);
   const htmlOutput = htmlTemplate(diffHtml);
   await fs.writeFile(path.join(outputDirectory, "index.html"), htmlOutput);
 }
