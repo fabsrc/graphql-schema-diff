@@ -4,10 +4,13 @@ import {
   findDangerousChanges,
   DangerousChange,
   BreakingChange
-} from 'graphql';
-import { lexicographicSortSchema } from 'graphql/utilities';
-import disparity from 'disparity';
-import { loadSchema } from 'graphql-toolkit';
+} from "graphql";
+import { lexicographicSortSchema } from "graphql/utilities";
+import disparity from "disparity";
+import { loadSchema } from "@graphql-toolkit/core";
+import { UrlLoader } from "@graphql-toolkit/url-loader";
+import { JsonFileLoader } from "@graphql-toolkit/json-file-loader";
+import { GraphQLFileLoader } from "@graphql-toolkit/graphql-file-loader";
 
 export type Headers = Record<string, string>;
 
@@ -49,12 +52,18 @@ export async function getDiff(
     skipGraphQLImport: false
   };
   let [leftSchema, rightSchema] = await Promise.all([
-    loadSchema(leftSchemaLocation, leftSchemaOptions),
-    loadSchema(rightSchemaLocation, rightSchemaOptions)
+    loadSchema(leftSchemaLocation, {
+      loaders: [new UrlLoader(), new JsonFileLoader(), new GraphQLFileLoader()],
+      ...leftSchemaOptions
+    }),
+    loadSchema(rightSchemaLocation, {
+      loaders: [new UrlLoader(), new JsonFileLoader(), new GraphQLFileLoader()],
+      ...rightSchemaOptions
+    })
   ]);
 
   if (!leftSchema || !rightSchema) {
-    throw new Error('Schemas not defined');
+    throw new Error("Schemas not defined");
   }
 
   if (options.sortSchema) {
