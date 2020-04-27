@@ -43,6 +43,7 @@ export async function getDiff(
       ...(options.leftSchema && options.leftSchema.headers),
     },
     skipGraphQLImport: false,
+    descriptions: false,
   };
   const rightSchemaOptions = {
     headers: {
@@ -50,6 +51,7 @@ export async function getDiff(
       ...(options.rightSchema && options.rightSchema.headers),
     },
     skipGraphQLImport: false,
+    descriptions: false,
   };
   let [leftSchema, rightSchema] = await Promise.all([
     loadSchema(leftSchemaLocation, {
