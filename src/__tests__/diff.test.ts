@@ -8,7 +8,7 @@ describe("getDiff", () => {
   describe("remote schema fetching", () => {
     const testRemoteSchemaLocation = "http://test/graphql";
     const introspectionQueryBody = JSON.stringify({
-      query: print(parse(getIntrospectionQuery({ descriptions: true }))),
+      query: print(parse(getIntrospectionQuery({ descriptions: false }))),
       variables: {},
       operationName: "IntrospectionQuery",
     });
