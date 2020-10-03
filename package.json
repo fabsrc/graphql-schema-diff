@@ -32,10 +32,10 @@
     "url": "https://github.com/fabsrc/graphql-schema-diff"
   },
   "dependencies": {
-    "@graphql-toolkit/core": "^0.10.7",
-    "@graphql-toolkit/graphql-file-loader": "^0.10.7",
-    "@graphql-toolkit/json-file-loader": "^0.10.7",
-    "@graphql-toolkit/url-loader": "^0.10.7",
+    "@graphql-tools/graphql-file-loader": "^6.2.4",
+    "@graphql-tools/json-file-loader": "^6.2.4",
+    "@graphql-tools/load": "^6.2.4",
+    "@graphql-tools/url-loader": "^6.3.0",
     "chalk": "^4.1.0",
     "diff2html": "^3.1.13",
     "disparity": "^3.1.0",
