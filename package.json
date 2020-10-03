@@ -32,29 +32,29 @@
     "url": "https://github.com/fabsrc/graphql-schema-diff"
   },
   "dependencies": {
-    "@graphql-toolkit/core": "^0.10.6",
-    "@graphql-toolkit/graphql-file-loader": "^0.10.6",
-    "@graphql-toolkit/json-file-loader": "^0.10.6",
-    "@graphql-toolkit/url-loader": "^0.10.6",
-    "chalk": "^4.0.0",
-    "diff2html": "^3.1.7",
-    "disparity": "^3.0.0",
-    "fs-extra": "^9.0.0",
-    "graphql": "^15.0.0",
-    "meow": "^7.0.1"
+    "@graphql-toolkit/core": "^0.10.7",
+    "@graphql-toolkit/graphql-file-loader": "^0.10.7",
+    "@graphql-toolkit/json-file-loader": "^0.10.7",
+    "@graphql-toolkit/url-loader": "^0.10.7",
+    "chalk": "^4.1.0",
+    "diff2html": "^3.1.13",
+    "disparity": "^3.1.0",
+    "fs-extra": "^9.0.1",
+    "graphql": "^15.3.0",
+    "meow": "^7.1.1"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.0",
+    "@types/fs-extra": "^9.0.1",
     "@types/hogan.js": "^3.0.0",
-    "@types/jest": "^25.2.2",
+    "@types/jest": "^26.0.14",
     "@types/meow": "^5.0.0",
-    "@types/node": "^14.0.1",
-    "jest": "^26.0.1",
-    "nock": "^12.0.3",
-    "prettier": "^2.0.5",
-    "ts-jest": "^26.0.0",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.9.2"
+    "@types/node": "^14.11.2",
+    "jest": "^26.4.2",
+    "nock": "^13.0.4",
+    "prettier": "^2.1.2",
+    "ts-jest": "^26.4.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
   },
   "engines": {
     "node": ">= 10"
