@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ES2019",
     "module": "commonjs",
     "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
-    "typeRoots" : ["./node_modules/@types", "./@types"],
+    "typeRoots": ["./node_modules/@types", "./@types"],
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "declaration": true,

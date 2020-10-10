@@ -7,10 +7,10 @@ import {
 } from "graphql";
 import { lexicographicSortSchema } from "graphql/utilities";
 import disparity from "disparity";
-import { loadSchema } from "@graphql-toolkit/core";
-import { UrlLoader } from "@graphql-toolkit/url-loader";
-import { JsonFileLoader } from "@graphql-toolkit/json-file-loader";
-import { GraphQLFileLoader } from "@graphql-toolkit/graphql-file-loader";
+import { loadSchema } from "@graphql-tools/load";
+import { UrlLoader } from "@graphql-tools/url-loader";
+import { JsonFileLoader } from "@graphql-tools/json-file-loader";
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 
 export type Headers = Record<string, string>;
 

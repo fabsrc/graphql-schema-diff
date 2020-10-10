@@ -8,9 +8,7 @@ describe("getDiff", () => {
   describe("remote schema fetching", () => {
     const testRemoteSchemaLocation = "http://test/graphql";
     const introspectionQueryBody = JSON.stringify({
-      query: print(parse(getIntrospectionQuery({ descriptions: false }))),
-      variables: {},
-      operationName: "IntrospectionQuery",
+      query: print(parse(getIntrospectionQuery({ descriptions: false })))
     });
 
     it("fetches remote schema successfully", async () => {
@@ -118,7 +116,7 @@ describe("getDiff", () => {
 
       return expect(
         getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation)
-      ).rejects.toThrow(/Unable to download schema from remote/);
+      ).rejects.toThrow(/Could not obtain introspection result/);
     });
 
     it("throws error on invalid response", () => {
@@ -129,7 +127,7 @@ describe("getDiff", () => {
 
       return expect(
         getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation)
-      ).rejects.toThrow(/Unable to download schema from remote/);
+      ).rejects.toThrow(/Could not obtain introspection result/);
     });
 
     afterEach(() => {
