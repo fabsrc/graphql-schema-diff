@@ -2,16 +2,17 @@
   "name": "graphql-schema-diff",
   "version": "2.5.0",
   "description": "Returns the diff of two GraphQL schemas. Detects dangerous and breaking changes.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node --files src/cli",
+    "dev": "node --loader ts-node/esm ./src/cli.ts",
     "prepack": "npm run build",
     "test": "jest",
     "fmt": "prettier --write src/**"
   },
-  "bin": "dist/cli.js",
+  "bin": "./dist/cli.js",
   "files": [
     "dist/",
     "npm-shrinkwrap.json"
@@ -40,10 +41,9 @@
     "chalk": "^4.1.2",
     "diff2html": "^3.4.18",
     "disparity": "^3.2.0",
-    "fs-extra": "^10.1.0",
-    "graphql": "^15.6.1",
-    "meow": "^9.0.0",
-    "node-fetch": "^2.6.7"
+    "fs-extra": "^10.0.0",
+    "graphql": "^15.5.1",
+    "meow": "^10.1.1"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
@@ -59,13 +59,21 @@
     "typescript": "^4.7.4"
   },
   "engines": {
-    "node": ">= 12"
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "jest": {
     "roots": [
       "src"
     ],
-    "preset": "ts-jest",
+    "preset": "ts-jest/presets/default-esm",
+    "globals": {
+      "ts-jest": {
+        "useESM": true
+      }
+    },
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
     "testEnvironment": "node",
     "collectCoverage": true
   }
