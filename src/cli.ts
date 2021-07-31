@@ -28,22 +28,22 @@ const cli = meow(
 `,
   {
     flags: {
-      "fail-on-dangerous-changes": {
+      failOnDangerousChanges: {
         type: "boolean",
       },
-      "fail-on-breaking-changes": {
+      failOnBreakingChanges: {
         type: "boolean",
       },
-      "fail-on-all-changes": {
+      failOnAllChanges: {
         type: "boolean",
       },
-      "use-colors": {
+      useColors: {
         type: "boolean",
       },
-      "create-html-output": {
+      createHtmlOutput: {
         type: "boolean",
       },
-      "html-output-directory": {
+      htmlOutputDirectory: {
         type: "string",
         default: "schemaDiff",
       },
@@ -51,15 +51,21 @@ const cli = meow(
         type: "string",
         alias: "H",
       },
-      "left-schema-header": {
+      leftSchemaHeader: {
         type: "string",
       },
-      "right-schema-header": {
+      rightSchemaHeader: {
         type: "string",
       },
-      "sort-schema": {
+      sortSchema: {
         type: "boolean",
         alias: "s",
+      },
+      help: {
+        alias: "h",
+      },
+      version: {
+        alias: "v",
       },
     },
   }

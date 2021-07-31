@@ -5,7 +5,6 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
-    "typeRoots": ["./node_modules/@types", "./@types"],
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "declaration": true,
