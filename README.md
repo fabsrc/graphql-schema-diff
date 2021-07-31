@@ -1,6 +1,6 @@
 # GraphQL Schema Diff
 
-[![Build Status](https://img.shields.io/travis/fabsrc/graphql-schema-diff.svg?style=flat-square)](https://travis-ci.org/fabsrc/graphql-schema-diff)
+[![Build Status](https://img.shields.io/github/workflow/status/fabsrc/graphql-schema-diff/CI/master.svg?style=flat-square)](https://github.com/fabsrc/graphql-schema-diff/actions?query=workflow%3A%22CI%22)
 [![npm](https://img.shields.io/npm/v/graphql-schema-diff.svg?style=flat-square)](https://www.npmjs.com/package/graphql-schema-diff)
 [![Dependencies](https://img.shields.io/david/fabsrc/graphql-schema-diff.svg?style=flat-square)](https://david-dm.org/fabsrc/graphql-schema-diff)
 [![Development Dependencies](https://img.shields.io/david/dev/fabsrc/graphql-schema-diff.svg?style=flat-square)](https://david-dm.org/fabsrc/graphql-schema-diff?type=dev)
@@ -55,7 +55,7 @@ Schema locations can be:
 ```js
 import { getDiff } from 'graphql-schema-diff';
 
-const currentSchemaLocation = 'https://swapi.graph.cool/';
+const currentSchemaLocation = 'https://swapi-graphql.netlify.app/.netlify/functions/index';
 const newSchemaLocation = './schema.graphql';
 
 getDiff(currentSchemaLocation, newSchemaLocation)
