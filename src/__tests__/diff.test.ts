@@ -1,137 +1,154 @@
-import nock from "nock";
+import { URL } from "url";
+import { MockAgent, setGlobalDispatcher } from "undici";
 import path from "path";
 import { getDiff } from "../diff";
 import { getIntrospectionQuery, parse, print } from "graphql";
 import introspectionResponse from "./fixtures/introspectionResponse.json";
 
+const agent = new MockAgent({ connections: 1 });
+setGlobalDispatcher(agent);
+agent.disableNetConnect();
+
 describe("getDiff", () => {
   describe("remote schema fetching", () => {
-    const testRemoteSchemaLocation = "http://test/graphql";
+    const testUrl = new URL("http://example.com/graphql");
     const introspectionQueryBody = JSON.stringify({
-      query: print(parse(getIntrospectionQuery({ descriptions: false })))
+      query: print(parse(getIntrospectionQuery({ descriptions: false }))),
     });
+    const client = agent.get(testUrl.origin);
 
     it("fetches remote schema successfully", async () => {
-      nock(testRemoteSchemaLocation)
-        .post(/.*/, introspectionQueryBody)
-        .twice()
-        .reply(200, introspectionResponse);
+      client
+        .intercept({
+          path: testUrl.pathname,
+          method: "POST",
+          body: introspectionQueryBody,
+        })
+        .reply(200, introspectionResponse)
+        .times(2);
 
-      const result = await getDiff(
-        testRemoteSchemaLocation,
-        testRemoteSchemaLocation
-      );
+      const result = await getDiff(testUrl.href, testUrl.href);
       expect(result).toBeUndefined();
     });
 
     it("fetches remote schemas with headers", async () => {
-      nock(testRemoteSchemaLocation)
-        .matchHeader("test", "test")
-        .post(/.*/, introspectionQueryBody)
-        .twice()
-        .reply(200, introspectionResponse);
+      client
+        .intercept({
+          path: testUrl.pathname,
+          method: "POST",
+          body: introspectionQueryBody,
+          headers: { test: "test" },
+        })
+        .reply(200, introspectionResponse)
+        .times(2);
 
-      const result = await getDiff(
-        testRemoteSchemaLocation,
-        testRemoteSchemaLocation,
-        {
-          headers: {
-            Test: "test",
-          },
-        }
-      );
+      const result = await getDiff(testUrl.href, testUrl.href, {
+        headers: {
+          Test: "test",
+        },
+      });
       expect(result).toBeUndefined();
     });
 
     it("fetches remote schemas with left and right schema headers", async () => {
-      const testRemoteRightSchemaLocation = "http://testRight/graphql";
-      nock(testRemoteSchemaLocation)
-        .matchHeader("test", "left")
-        .post(/.*/, introspectionQueryBody)
+      const testRightUrl = new URL("http://testRight/graphql");
+      const rightClient = agent.get(testRightUrl.origin);
+      client
+        .intercept({
+          path: testUrl.pathname,
+          method: "POST",
+          body: introspectionQueryBody,
+          headers: { test: "left" },
+        })
         .reply(200, introspectionResponse);
-      nock(testRemoteRightSchemaLocation)
-        .matchHeader("test", "right")
-        .post(/.*/, introspectionQueryBody)
+      rightClient
+        .intercept({
+          path: testUrl.pathname,
+          method: "POST",
+          body: introspectionQueryBody,
+          headers: { test: "right" },
+        })
         .reply(200, introspectionResponse);
 
-      const result = await getDiff(
-        testRemoteSchemaLocation,
-        testRemoteRightSchemaLocation,
-        {
-          leftSchema: {
-            headers: {
-              Test: "left",
-            },
+      const result = await getDiff(testUrl.href, testRightUrl.href, {
+        leftSchema: {
+          headers: {
+            Test: "left",
           },
-          rightSchema: {
-            headers: {
-              Test: "right",
-            },
+        },
+        rightSchema: {
+          headers: {
+            Test: "right",
           },
-        }
-      );
+        },
+      });
       expect(result).toBeUndefined();
     });
 
     it("fetches remote schemas with merged schema headers", async () => {
-      const testRemoteRightSchemaLocation = "http://testRight/graphql";
-      nock(testRemoteSchemaLocation)
-        .matchHeader("global", "merged")
-        .matchHeader("test", "left")
-        .post(/.*/, introspectionQueryBody)
+      const testRightUrl = new URL("http://testRight/graphql");
+      const rightClient = agent.get(testRightUrl.origin);
+      client
+        .intercept({
+          path: testUrl.pathname,
+          method: "POST",
+          body: introspectionQueryBody,
+          headers: { test: "left", global: "merged" },
+        })
         .reply(200, introspectionResponse);
-      nock(testRemoteRightSchemaLocation)
-        .matchHeader("global", "merged")
-        .matchHeader("test", "right")
-        .post(/.*/, introspectionQueryBody)
+      rightClient
+        .intercept({
+          path: testUrl.pathname,
+          method: "POST",
+          body: introspectionQueryBody,
+          headers: { test: "right", global: "merged" },
+        })
         .reply(200, introspectionResponse);
 
-      const result = await getDiff(
-        testRemoteSchemaLocation,
-        testRemoteRightSchemaLocation,
-        {
+      const result = await getDiff(testUrl.href, testRightUrl.href, {
+        headers: {
+          Global: "merged",
+        },
+        leftSchema: {
           headers: {
-            Global: "merged",
+            Test: "left",
           },
-          leftSchema: {
-            headers: {
-              Test: "left",
-            },
+        },
+        rightSchema: {
+          headers: {
+            Test: "right",
           },
-          rightSchema: {
-            headers: {
-              Test: "right",
-            },
-          },
-        }
-      );
+        },
+      });
       expect(result).toBeUndefined();
     });
 
     it("throws error on status codes other than 200", () => {
-      nock(testRemoteSchemaLocation)
-        .post(/.*/, introspectionQueryBody)
-        .twice()
+      client
+        .intercept({
+          path: testUrl.pathname,
+          method: "POST",
+          body: introspectionQueryBody,
+        })
         .reply(404, {});
 
-      return expect(
-        getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation)
-      ).rejects.toThrow(/Could not obtain introspection result/);
+      return expect(getDiff(testUrl.href, testUrl.href)).rejects.toThrow(
+        /Could not obtain introspection result/
+      );
     });
 
     it("throws error on invalid response", () => {
-      nock(testRemoteSchemaLocation)
-        .post(/.*/, introspectionQueryBody)
-        .twice()
-        .reply(200, { invalid: "response" });
+      client
+        .intercept({
+          path: testUrl.pathname,
+          method: "POST",
+          body: introspectionQueryBody,
+        })
+        .reply(404, { invalid: "response" });
 
-      return expect(
-        getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation)
-      ).rejects.toThrow(/Could not obtain introspection result/);
-    });
-
-    afterEach(() => {
-      nock.cleanAll();
+      return expect(getDiff(testUrl.href, testUrl.href)).rejects.toThrow(
+        /Could not obtain introspection result/
+      );
     });
   });
 
