@@ -1,12 +1,12 @@
 {
   "name": "graphql-schema-diff",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "graphql-schema-diff",
-      "version": "2.4.0",
+      "version": "2.5.0",
       "license": "MIT",
       "dependencies": {
         "@graphql-tools/graphql-file-loader": "^7.5.2",
