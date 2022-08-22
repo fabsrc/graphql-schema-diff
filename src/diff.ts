@@ -11,6 +11,7 @@ import { loadSchema } from "@graphql-tools/load";
 import { UrlLoader } from "@graphql-tools/url-loader";
 import { JsonFileLoader } from "@graphql-tools/json-file-loader";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
+import fetch from "node-fetch";
 
 export type Headers = Record<string, string>;
 
@@ -37,22 +38,15 @@ export async function getDiff(
   rightSchemaLocation: string,
   options: DiffOptions = {}
 ): Promise<DiffResponse | undefined> {
-  const leftSchemaOptions = {
-    headers: {
-      ...options.headers,
-      ...(options.leftSchema && options.leftSchema.headers),
-    },
+  const getSchemaOptions = (customHeaders?: Headers) => ({
+    headers: { ...options.headers, ...customHeaders },
     skipGraphQLImport: false,
     descriptions: false,
-  };
-  const rightSchemaOptions = {
-    headers: {
-      ...options.headers,
-      ...(options.rightSchema && options.rightSchema.headers),
-    },
-    skipGraphQLImport: false,
-    descriptions: false,
-  };
+    customFetch: fetch,
+  });
+  const leftSchemaOptions = getSchemaOptions(options.leftSchema?.headers);
+  const rightSchemaOptions = getSchemaOptions(options.rightSchema?.headers);
+
   let [leftSchema, rightSchema] = await Promise.all([
     loadSchema(leftSchemaLocation, {
       loaders: [new UrlLoader(), new JsonFileLoader(), new GraphQLFileLoader()],
