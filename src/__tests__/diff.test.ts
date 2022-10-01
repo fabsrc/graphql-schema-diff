@@ -1,6 +1,6 @@
 import nock from "nock";
 import path from "path";
-import { getDiff } from "../diff";
+import { getDiff } from "../diff.js";
 import { getIntrospectionQuery, parse, print } from "graphql";
 import introspectionResponse from "./fixtures/introspectionResponse.json";
 

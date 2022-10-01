@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
-    "module": "commonjs",
+    "target": "ES2020",
+    "module": "ESNext",
     "rootDir": "./src",
     "outDir": "./dist",
+    "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "declaration": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/__tests__"]

@@ -1,5 +1,8 @@
+import { createRequire } from "module";
 import path from "path";
 import fs from "fs-extra";
+
+const require = createRequire(import.meta.url);
 
 const htmlTemplate = (diff: string): string => `<html>
 <head>

@@ -2,8 +2,8 @@
 
 import meow from "meow";
 import chalk from "chalk";
-import { createHtmlOutput } from "./html";
-import { getDiff, Headers } from "./diff";
+import { createHtmlOutput } from "./html.js";
+import { getDiff, Headers } from "./diff.js";
 
 const cli = meow(
   `
@@ -27,6 +27,7 @@ const cli = meow(
     $ graphql-schema-diff https://example.com/graphql schema.graphql -H 'Authorization: Bearer 123'
 `,
   {
+    importMeta: import.meta,
     flags: {
       failOnDangerousChanges: {
         type: "boolean",
