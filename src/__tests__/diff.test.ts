@@ -191,6 +191,19 @@ describe("getDiff", () => {
       }
     });
 
+    it("returns the diff between two schemas with changed directives", async () => {
+      const result = await getDiff(
+        path.join(__dirname, "fixtures/localSchemaDirective.graphql"),
+        path.join(__dirname, "fixtures/localSchemaDirectiveChanged.graphql")
+      );
+
+      expect(result).toBeDefined();
+
+      if (result) {
+        expect(result.diff).toMatch(/@test\(name: "TEST"\)/);
+      }
+    });
+
     it("returns dangerous changes", async () => {
       const result = await getDiff(
         path.join(__dirname, "fixtures/localSchema.graphql"),
