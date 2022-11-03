@@ -14,7 +14,6 @@ const cli = meow(
     --fail-on-dangerous-changes  Exit with error on dangerous changes
     --fail-on-breaking-changes \t Exit with error on breaking changes
     --fail-on-all-changes \t Exit with error on all changes
-    --use-colors \t\t Use colors for diff terminal output
     --create-html-output \t Creates an HTML file containing the diff
     --html-output-directory \t Directory where the HTML file should be stored (Default: './schemaDiff')
     --header, -H \t\t Header to send to all remote schema sources
@@ -37,6 +36,7 @@ const cli = meow(
       failOnAllChanges: {
         type: "boolean",
       },
+      // Deprecated: chalk.supportsColor should be used instead
       useColors: {
         type: "boolean",
       },
@@ -134,7 +134,7 @@ getDiff(leftSchemaLocation, rightSchemaLocation, {
     const hasBreakingChanges = result.breakingChanges.length !== 0;
     const hasDangerousChanges = result.dangerousChanges.length !== 0;
 
-    if (cli.flags.useColors) {
+    if (cli.flags.useColors || chalk.supportsColor) {
       console.log(result.diff);
     } else {
       console.log(result.diffNoColor);
