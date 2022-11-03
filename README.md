@@ -25,7 +25,6 @@ $ graphql-schema-diff --help
     --fail-on-dangerous-changes  Exit with error on dangerous changes
     --fail-on-breaking-changes   Exit with error on breaking changes
     --fail-on-all-changes        Exit with error on all changes
-    --use-colors                 Use colors for diff terminal output
     --create-html-output         Creates an HTML file containing the diff
     --html-output-directory      Directory where the HTML file should be stored (Default: './schemaDiff')
     --header, -H                 Header to send to all remote schema sources
