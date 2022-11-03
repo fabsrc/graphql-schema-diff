@@ -1,5 +1,4 @@
 import {
-  printSchema,
   findBreakingChanges,
   findDangerousChanges,
   DangerousChange,
@@ -10,6 +9,7 @@ import disparity from "disparity";
 import { loadSchema } from "@graphql-tools/load";
 import { UrlLoader } from "@graphql-tools/url-loader";
 import { JsonFileLoader } from "@graphql-tools/json-file-loader";
+import { printSchemaWithDirectives } from "@graphql-tools/utils";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import fetch from "node-fetch";
 
@@ -70,8 +70,8 @@ export async function getDiff(
   }
 
   const [leftSchemaSDL, rightSchemaSDL] = [
-    printSchema(leftSchema),
-    printSchema(rightSchema),
+    printSchemaWithDirectives(leftSchema),
+    printSchemaWithDirectives(rightSchema),
   ];
 
   if (leftSchemaSDL === rightSchemaSDL) {
