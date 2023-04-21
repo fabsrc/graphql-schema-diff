@@ -1,6 +1,6 @@
 # GraphQL Schema Diff
 
-[![Build Status](https://img.shields.io/github/workflow/status/fabsrc/graphql-schema-diff/CI/master.svg?style=flat-square)](https://github.com/fabsrc/graphql-schema-diff/actions/workflows/main.yml)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/fabsrc/graphql-schema-diff/main.yml?branch=master&style=flat-square)](https://github.com/fabsrc/graphql-schema-diff/actions/workflows/main.yml)
 [![npm](https://img.shields.io/npm/v/graphql-schema-diff.svg?style=flat-square)](https://www.npmjs.com/package/graphql-schema-diff)
 
 Returns the diff of two GraphQL schemas. Detects dangerous and breaking changes.

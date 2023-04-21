@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      - dependency-name: "chalk"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "meow"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "node-fetch"
+        update-types: ["version-update:semver-major"]
