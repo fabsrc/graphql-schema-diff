@@ -2188,9 +2188,9 @@
       }
     },
     "node_modules/diff2html": {
-      "version": "3.4.18",
-      "resolved": "https://registry.npmjs.org/diff2html/-/diff2html-3.4.18.tgz",
-      "integrity": "sha512-eZP1vKjCNMPFpCoY0+ATZYTgdUUriUTLxRLjjAx6qPje7orIirtTkW3ghVcz3dIBjcum47AGIHBHpLhdrdS7aw==",
+      "version": "3.4.35",
+      "resolved": "https://registry.npmjs.org/diff2html/-/diff2html-3.4.35.tgz",
+      "integrity": "sha512-+pKs1BrA7l8DAwY33awHyznE3iuTIo58xmINmDBUwGsnou2KvBoSr6dAa6AvQAM7SH+nGtuOKNXmxumgbGp/Pw==",
       "dependencies": {
         "diff": "5.1.0",
         "hogan.js": "3.0.2"
@@ -6839,9 +6839,9 @@
       "dev": true
     },
     "diff2html": {
-      "version": "3.4.18",
-      "resolved": "https://registry.npmjs.org/diff2html/-/diff2html-3.4.18.tgz",
-      "integrity": "sha512-eZP1vKjCNMPFpCoY0+ATZYTgdUUriUTLxRLjjAx6qPje7orIirtTkW3ghVcz3dIBjcum47AGIHBHpLhdrdS7aw==",
+      "version": "3.4.35",
+      "resolved": "https://registry.npmjs.org/diff2html/-/diff2html-3.4.35.tgz",
+      "integrity": "sha512-+pKs1BrA7l8DAwY33awHyznE3iuTIo58xmINmDBUwGsnou2KvBoSr6dAa6AvQAM7SH+nGtuOKNXmxumgbGp/Pw==",
       "requires": {
         "diff": "5.1.0",
         "highlight.js": "11.6.0",
