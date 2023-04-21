@@ -884,10 +884,11 @@
       }
     },
     "node_modules/@graphql-tools/utils": {
-      "version": "9.0.1",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-9.0.1.tgz",
-      "integrity": "sha512-z6FimVa5E44bHKmqK0/uMp9hHvHo2Tkt9A5rlLb40ReD/8IFKehSXLzM4b2N1vcP7mSsbXIdDK9Aoc8jT/he1Q==",
+      "version": "9.2.1",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-9.2.1.tgz",
+      "integrity": "sha512-WUw506Ql6xzmOORlriNrD6Ugx+HjVgYxt9KCXD9mHAak+eaXSwuGGPyE60hy9xaDEoXKBsG7SkG69ybitaVl6A==",
       "dependencies": {
+        "@graphql-typed-document-node/core": "^3.1.1",
         "tslib": "^2.4.0"
       },
       "peerDependencies": {
@@ -918,6 +919,14 @@
       },
       "peerDependencies": {
         "graphql": "^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
+      }
+    },
+    "node_modules/@graphql-typed-document-node/core": {
+      "version": "3.2.0",
+      "resolved": "https://registry.npmjs.org/@graphql-typed-document-node/core/-/core-3.2.0.tgz",
+      "integrity": "sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==",
+      "peerDependencies": {
+        "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
       }
     },
     "node_modules/@highlightjs/cdn-assets": {
@@ -5798,10 +5807,11 @@
       }
     },
     "@graphql-tools/utils": {
-      "version": "9.0.1",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-9.0.1.tgz",
-      "integrity": "sha512-z6FimVa5E44bHKmqK0/uMp9hHvHo2Tkt9A5rlLb40ReD/8IFKehSXLzM4b2N1vcP7mSsbXIdDK9Aoc8jT/he1Q==",
+      "version": "9.2.1",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-9.2.1.tgz",
+      "integrity": "sha512-WUw506Ql6xzmOORlriNrD6Ugx+HjVgYxt9KCXD9mHAak+eaXSwuGGPyE60hy9xaDEoXKBsG7SkG69ybitaVl6A==",
       "requires": {
+        "@graphql-typed-document-node/core": "^3.1.1",
         "tslib": "^2.4.0"
       }
     },
@@ -5826,6 +5836,12 @@
           }
         }
       }
+    },
+    "@graphql-typed-document-node/core": {
+      "version": "3.2.0",
+      "resolved": "https://registry.npmjs.org/@graphql-typed-document-node/core/-/core-3.2.0.tgz",
+      "integrity": "sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==",
+      "requires": {}
     },
     "@highlightjs/cdn-assets": {
       "version": "11.6.0",
