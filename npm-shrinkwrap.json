@@ -1513,9 +1513,9 @@
       "integrity": "sha512-0N5Y1XAdcl865nDdjbO0m3T6FdmQ4ijE89/urOHLREyTXbpMWbSafx9y7XIsgWGtwUP2iYTinLyyW3FatAxBLQ=="
     },
     "node_modules/@types/node-fetch": {
-      "version": "2.6.2",
-      "resolved": "https://registry.npmjs.org/@types/node-fetch/-/node-fetch-2.6.2.tgz",
-      "integrity": "sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==",
+      "version": "2.6.3",
+      "resolved": "https://registry.npmjs.org/@types/node-fetch/-/node-fetch-2.6.3.tgz",
+      "integrity": "sha512-ETTL1mOEdq/sxUtgtOhKjyB2Irra4cjxksvcMUR5Zr4n+PxVhsCD9WS46oPbHL3et9Zde7CNRr+WUNlcHvsX+w==",
       "dev": true,
       "dependencies": {
         "@types/node": "*",
@@ -3862,9 +3862,9 @@
       }
     },
     "node_modules/node-fetch": {
-      "version": "2.6.7",
-      "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.7.tgz",
-      "integrity": "sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==",
+      "version": "2.6.9",
+      "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.9.tgz",
+      "integrity": "sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==",
       "dependencies": {
         "whatwg-url": "^5.0.0"
       },
@@ -6327,9 +6327,9 @@
       "integrity": "sha512-0N5Y1XAdcl865nDdjbO0m3T6FdmQ4ijE89/urOHLREyTXbpMWbSafx9y7XIsgWGtwUP2iYTinLyyW3FatAxBLQ=="
     },
     "@types/node-fetch": {
-      "version": "2.6.2",
-      "resolved": "https://registry.npmjs.org/@types/node-fetch/-/node-fetch-2.6.2.tgz",
-      "integrity": "sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==",
+      "version": "2.6.3",
+      "resolved": "https://registry.npmjs.org/@types/node-fetch/-/node-fetch-2.6.3.tgz",
+      "integrity": "sha512-ETTL1mOEdq/sxUtgtOhKjyB2Irra4cjxksvcMUR5Zr4n+PxVhsCD9WS46oPbHL3et9Zde7CNRr+WUNlcHvsX+w==",
       "dev": true,
       "requires": {
         "@types/node": "*",
@@ -8072,9 +8072,9 @@
       "integrity": "sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ=="
     },
     "node-fetch": {
-      "version": "2.6.7",
-      "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.7.tgz",
-      "integrity": "sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==",
+      "version": "2.6.9",
+      "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.9.tgz",
+      "integrity": "sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==",
       "requires": {
         "whatwg-url": "^5.0.0"
       }
