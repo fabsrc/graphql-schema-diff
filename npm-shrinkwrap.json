@@ -852,25 +852,14 @@
       }
     },
     "node_modules/@graphql-tools/json-file-loader": {
-      "version": "7.4.3",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/json-file-loader/-/json-file-loader-7.4.3.tgz",
-      "integrity": "sha512-YihARAoaGJnYakDAaUkdZ6GsvGcyZRdZK2qx9FWkqtpHt02FLCBpcjjLq/cpM0N6K0ecqzh/dYSVD7MthUFXQg==",
+      "version": "7.4.18",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/json-file-loader/-/json-file-loader-7.4.18.tgz",
+      "integrity": "sha512-AJ1b6Y1wiVgkwsxT5dELXhIVUPs/u3VZ8/0/oOtpcoyO/vAeM5rOvvWegzicOOnQw8G45fgBRMkkRfeuwVt6+w==",
       "dependencies": {
-        "@graphql-tools/utils": "8.10.0",
+        "@graphql-tools/utils": "^9.2.1",
         "globby": "^11.0.3",
         "tslib": "^2.4.0",
         "unixify": "^1.0.0"
-      },
-      "peerDependencies": {
-        "graphql": "^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
-      }
-    },
-    "node_modules/@graphql-tools/json-file-loader/node_modules/@graphql-tools/utils": {
-      "version": "8.10.0",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-8.10.0.tgz",
-      "integrity": "sha512-yI+V373FdXQbYfqdarehn9vRWDZZYuvyQ/xwiv5ez2BbobHrqsexF7qs56plLRaQ8ESYpVAjMQvJWe9s23O0Jg==",
-      "dependencies": {
-        "tslib": "^2.4.0"
       },
       "peerDependencies": {
         "graphql": "^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
@@ -5856,24 +5845,14 @@
       }
     },
     "@graphql-tools/json-file-loader": {
-      "version": "7.4.3",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/json-file-loader/-/json-file-loader-7.4.3.tgz",
-      "integrity": "sha512-YihARAoaGJnYakDAaUkdZ6GsvGcyZRdZK2qx9FWkqtpHt02FLCBpcjjLq/cpM0N6K0ecqzh/dYSVD7MthUFXQg==",
+      "version": "7.4.18",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/json-file-loader/-/json-file-loader-7.4.18.tgz",
+      "integrity": "sha512-AJ1b6Y1wiVgkwsxT5dELXhIVUPs/u3VZ8/0/oOtpcoyO/vAeM5rOvvWegzicOOnQw8G45fgBRMkkRfeuwVt6+w==",
       "requires": {
-        "@graphql-tools/utils": "8.10.0",
+        "@graphql-tools/utils": "^9.2.1",
         "globby": "^11.0.3",
         "tslib": "^2.4.0",
         "unixify": "^1.0.0"
-      },
-      "dependencies": {
-        "@graphql-tools/utils": {
-          "version": "8.10.0",
-          "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-8.10.0.tgz",
-          "integrity": "sha512-yI+V373FdXQbYfqdarehn9vRWDZZYuvyQ/xwiv5ez2BbobHrqsexF7qs56plLRaQ8ESYpVAjMQvJWe9s23O0Jg==",
-          "requires": {
-            "tslib": "^2.4.0"
-          }
-        }
       }
     },
     "@graphql-tools/load": {
