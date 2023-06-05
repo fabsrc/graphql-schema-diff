@@ -19,7 +19,7 @@
         "diff2html": "^3.4.35",
         "disparity": "^3.2.0",
         "fs-extra": "^11.1.1",
-        "graphql": "^15.8.0",
+        "graphql": "^16.6.0",
         "meow": "^9.0.0",
         "node-fetch": "^2.6.11"
       },
@@ -2736,11 +2736,11 @@
       "integrity": "sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA=="
     },
     "node_modules/graphql": {
-      "version": "15.8.0",
-      "resolved": "https://registry.npmjs.org/graphql/-/graphql-15.8.0.tgz",
-      "integrity": "sha512-5gghUc24tP9HRznNpV2+FIoq3xKkj5dTQqf4v0CpdPbFVwFkWoxOM+o+2OC9ZSvjEMTjfmG9QT+gcvggTwW1zw==",
+      "version": "16.6.0",
+      "resolved": "https://registry.npmjs.org/graphql/-/graphql-16.6.0.tgz",
+      "integrity": "sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==",
       "engines": {
-        "node": ">= 10.x"
+        "node": "^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0"
       }
     },
     "node_modules/graphql-ws": {
@@ -7330,9 +7330,9 @@
       "integrity": "sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA=="
     },
     "graphql": {
-      "version": "15.8.0",
-      "resolved": "https://registry.npmjs.org/graphql/-/graphql-15.8.0.tgz",
-      "integrity": "sha512-5gghUc24tP9HRznNpV2+FIoq3xKkj5dTQqf4v0CpdPbFVwFkWoxOM+o+2OC9ZSvjEMTjfmG9QT+gcvggTwW1zw=="
+      "version": "16.6.0",
+      "resolved": "https://registry.npmjs.org/graphql/-/graphql-16.6.0.tgz",
+      "integrity": "sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw=="
     },
     "graphql-ws": {
       "version": "5.12.1",
