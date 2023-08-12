@@ -36,7 +36,7 @@
     "@graphql-tools/json-file-loader": "^8.0.0",
     "@graphql-tools/load": "^8.0.0",
     "@graphql-tools/url-loader": "^8.0.0",
-    "@graphql-tools/utils": "^9.2.1",
+    "@graphql-tools/utils": "^10.0.5",
     "@highlightjs/cdn-assets": "^11.8.0",
     "chalk": "^4.1.2",
     "diff2html": "^3.4.35",
