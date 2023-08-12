@@ -11,7 +11,9 @@
     "test": "jest",
     "fmt": "prettier --write src/**"
   },
-  "bin": "dist/cli.js",
+  "bin": {
+    "graphql-schema-diff": "dist/cli.js"
+  },
   "files": [
     "dist/",
     "npm-shrinkwrap.json"
@@ -29,7 +31,7 @@
   "homepage": "https://github.com/fabsrc/graphql-schema-diff#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fabsrc/graphql-schema-diff"
+    "url": "git+https://github.com/fabsrc/graphql-schema-diff.git"
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^8.0.0",
@@ -60,7 +62,7 @@
     "typescript": "^5.0.4"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">= 16"
   },
   "jest": {
     "roots": [
