@@ -1488,9 +1488,9 @@
       "integrity": "sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY="
     },
     "node_modules/@types/node": {
-      "version": "20.4.10",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-20.4.10.tgz",
-      "integrity": "sha512-vwzFiiy8Rn6E0MtA13/Cxxgpan/N6UeNYR9oUu6kuJWxu6zCk98trcDp8CBhbtaeuq9SykCmXkFr2lWLoPcvLg=="
+      "version": "20.5.7",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-20.5.7.tgz",
+      "integrity": "sha512-dP7f3LdZIysZnmvP3ANJYTSwg+wLLl8p7RqniVlV7j+oXSXAbt9h0WIBFmJy5inWZoX9wZN6eXx+YXd9Rh3RBA=="
     },
     "node_modules/@types/node-fetch": {
       "version": "2.6.4",
@@ -6167,9 +6167,9 @@
       "integrity": "sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY="
     },
     "@types/node": {
-      "version": "20.4.10",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-20.4.10.tgz",
-      "integrity": "sha512-vwzFiiy8Rn6E0MtA13/Cxxgpan/N6UeNYR9oUu6kuJWxu6zCk98trcDp8CBhbtaeuq9SykCmXkFr2lWLoPcvLg=="
+      "version": "20.5.7",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-20.5.7.tgz",
+      "integrity": "sha512-dP7f3LdZIysZnmvP3ANJYTSwg+wLLl8p7RqniVlV7j+oXSXAbt9h0WIBFmJy5inWZoX9wZN6eXx+YXd9Rh3RBA=="
     },
     "@types/node-fetch": {
       "version": "2.6.4",
