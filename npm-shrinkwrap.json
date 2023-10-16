@@ -1488,9 +1488,12 @@
       "integrity": "sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY="
     },
     "node_modules/@types/node": {
-      "version": "20.4.10",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-20.4.10.tgz",
-      "integrity": "sha512-vwzFiiy8Rn6E0MtA13/Cxxgpan/N6UeNYR9oUu6kuJWxu6zCk98trcDp8CBhbtaeuq9SykCmXkFr2lWLoPcvLg=="
+      "version": "20.8.6",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-20.8.6.tgz",
+      "integrity": "sha512-eWO4K2Ji70QzKUqRy6oyJWUeB7+g2cRagT3T/nxYibYcT4y2BDL8lqolRXjTHmkZCdJfIPaY73KbJAZmcryxTQ==",
+      "dependencies": {
+        "undici-types": "~5.25.1"
+      }
     },
     "node_modules/@types/node-fetch": {
       "version": "2.6.4",
@@ -4780,6 +4783,11 @@
         "node": ">=14.17"
       }
     },
+    "node_modules/undici-types": {
+      "version": "5.25.3",
+      "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-5.25.3.tgz",
+      "integrity": "sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA=="
+    },
     "node_modules/universalify": {
       "version": "2.0.0",
       "resolved": "https://registry.npmjs.org/universalify/-/universalify-2.0.0.tgz",
@@ -6167,9 +6175,12 @@
       "integrity": "sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY="
     },
     "@types/node": {
-      "version": "20.4.10",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-20.4.10.tgz",
-      "integrity": "sha512-vwzFiiy8Rn6E0MtA13/Cxxgpan/N6UeNYR9oUu6kuJWxu6zCk98trcDp8CBhbtaeuq9SykCmXkFr2lWLoPcvLg=="
+      "version": "20.8.6",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-20.8.6.tgz",
+      "integrity": "sha512-eWO4K2Ji70QzKUqRy6oyJWUeB7+g2cRagT3T/nxYibYcT4y2BDL8lqolRXjTHmkZCdJfIPaY73KbJAZmcryxTQ==",
+      "requires": {
+        "undici-types": "~5.25.1"
+      }
     },
     "@types/node-fetch": {
       "version": "2.6.4",
@@ -8559,6 +8570,11 @@
       "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.1.6.tgz",
       "integrity": "sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==",
       "dev": true
+    },
+    "undici-types": {
+      "version": "5.25.3",
+      "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-5.25.3.tgz",
+      "integrity": "sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA=="
     },
     "universalify": {
       "version": "2.0.0",
