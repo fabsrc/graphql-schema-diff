@@ -1434,9 +1434,9 @@
       }
     },
     "node_modules/@types/hogan.js": {
-      "version": "3.0.1",
-      "resolved": "https://registry.npmjs.org/@types/hogan.js/-/hogan.js-3.0.1.tgz",
-      "integrity": "sha512-D03i/2OY7kGyMq9wdQ7oD8roE49z/ZCZThe/nbahtvuqCNZY9T2MfedOWyeBdbEpY2W8Gnh/dyJLdFtUCOkYbg==",
+      "version": "3.0.3",
+      "resolved": "https://registry.npmjs.org/@types/hogan.js/-/hogan.js-3.0.3.tgz",
+      "integrity": "sha512-y3JK9j4UCYze4QvS1ijt3zYs4HxekyhwmuQD7tvjCg2ziAAGXRWQQSWpDfdyw079LqMSVWRaFSevb9HSs9vuZQ==",
       "dev": true
     },
     "node_modules/@types/istanbul-lib-coverage": {
@@ -6121,9 +6121,9 @@
       }
     },
     "@types/hogan.js": {
-      "version": "3.0.1",
-      "resolved": "https://registry.npmjs.org/@types/hogan.js/-/hogan.js-3.0.1.tgz",
-      "integrity": "sha512-D03i/2OY7kGyMq9wdQ7oD8roE49z/ZCZThe/nbahtvuqCNZY9T2MfedOWyeBdbEpY2W8Gnh/dyJLdFtUCOkYbg==",
+      "version": "3.0.3",
+      "resolved": "https://registry.npmjs.org/@types/hogan.js/-/hogan.js-3.0.3.tgz",
+      "integrity": "sha512-y3JK9j4UCYze4QvS1ijt3zYs4HxekyhwmuQD7tvjCg2ziAAGXRWQQSWpDfdyw079LqMSVWRaFSevb9HSs9vuZQ==",
       "dev": true
     },
     "@types/istanbul-lib-coverage": {
