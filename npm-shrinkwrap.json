@@ -2166,9 +2166,9 @@
       }
     },
     "node_modules/diff2html": {
-      "version": "3.4.35",
-      "resolved": "https://registry.npmjs.org/diff2html/-/diff2html-3.4.35.tgz",
-      "integrity": "sha512-+pKs1BrA7l8DAwY33awHyznE3iuTIo58xmINmDBUwGsnou2KvBoSr6dAa6AvQAM7SH+nGtuOKNXmxumgbGp/Pw==",
+      "version": "3.4.46",
+      "resolved": "https://registry.npmjs.org/diff2html/-/diff2html-3.4.46.tgz",
+      "integrity": "sha512-z1SkrH7jDLfmsOYgwJmGiDTdzsbpw7p4vx084kNzeYqER+/Kqp8+v/L7lMsIWpFzlX3NaJDJna280Y/HFqel+Q==",
       "dependencies": {
         "diff": "5.1.0",
         "hogan.js": "3.0.2"
@@ -2177,7 +2177,7 @@
         "node": ">=12"
       },
       "optionalDependencies": {
-        "highlight.js": "11.6.0"
+        "highlight.js": "11.8.0"
       }
     },
     "node_modules/dir-glob": {
@@ -2628,9 +2628,9 @@
       }
     },
     "node_modules/highlight.js": {
-      "version": "11.6.0",
-      "resolved": "https://registry.npmjs.org/highlight.js/-/highlight.js-11.6.0.tgz",
-      "integrity": "sha512-ig1eqDzJaB0pqEvlPVIpSSyMaO92bH1N2rJpLMN/nX396wTpDA4Eq0uK+7I/2XG17pFaaKE0kjV/XPeGt7Evjw==",
+      "version": "11.8.0",
+      "resolved": "https://registry.npmjs.org/highlight.js/-/highlight.js-11.8.0.tgz",
+      "integrity": "sha512-MedQhoqVdr0U6SSnWPzfiadUcDHfN/Wzq25AkXiQv9oiOO/sG0S7XkvpFIqWBl9Yq1UYyYOOVORs5UW2XlPyzg==",
       "optional": true,
       "engines": {
         "node": ">=12.0.0"
@@ -6687,12 +6687,12 @@
       "dev": true
     },
     "diff2html": {
-      "version": "3.4.35",
-      "resolved": "https://registry.npmjs.org/diff2html/-/diff2html-3.4.35.tgz",
-      "integrity": "sha512-+pKs1BrA7l8DAwY33awHyznE3iuTIo58xmINmDBUwGsnou2KvBoSr6dAa6AvQAM7SH+nGtuOKNXmxumgbGp/Pw==",
+      "version": "3.4.46",
+      "resolved": "https://registry.npmjs.org/diff2html/-/diff2html-3.4.46.tgz",
+      "integrity": "sha512-z1SkrH7jDLfmsOYgwJmGiDTdzsbpw7p4vx084kNzeYqER+/Kqp8+v/L7lMsIWpFzlX3NaJDJna280Y/HFqel+Q==",
       "requires": {
         "diff": "5.1.0",
-        "highlight.js": "11.6.0",
+        "highlight.js": "11.8.0",
         "hogan.js": "3.0.2"
       }
     },
@@ -7022,9 +7022,9 @@
       "integrity": "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="
     },
     "highlight.js": {
-      "version": "11.6.0",
-      "resolved": "https://registry.npmjs.org/highlight.js/-/highlight.js-11.6.0.tgz",
-      "integrity": "sha512-ig1eqDzJaB0pqEvlPVIpSSyMaO92bH1N2rJpLMN/nX396wTpDA4Eq0uK+7I/2XG17pFaaKE0kjV/XPeGt7Evjw==",
+      "version": "11.8.0",
+      "resolved": "https://registry.npmjs.org/highlight.js/-/highlight.js-11.8.0.tgz",
+      "integrity": "sha512-MedQhoqVdr0U6SSnWPzfiadUcDHfN/Wzq25AkXiQv9oiOO/sG0S7XkvpFIqWBl9Yq1UYyYOOVORs5UW2XlPyzg==",
       "optional": true
     },
     "hogan.js": {
