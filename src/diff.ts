@@ -36,7 +36,7 @@ export interface DiffOptions {
 export async function getDiff(
   leftSchemaLocation: string,
   rightSchemaLocation: string,
-  options: DiffOptions = {}
+  options: DiffOptions = {},
 ): Promise<DiffResponse | undefined> {
   const getSchemaOptions = (customHeaders?: Headers) => ({
     headers: { ...options.headers, ...customHeaders },

@@ -19,7 +19,7 @@ describe("getDiff", () => {
 
       const result = await getDiff(
         testRemoteSchemaLocation,
-        testRemoteSchemaLocation
+        testRemoteSchemaLocation,
       );
       expect(result).toBeUndefined();
     });
@@ -38,7 +38,7 @@ describe("getDiff", () => {
           headers: {
             Test: "test",
           },
-        }
+        },
       );
       expect(result).toBeUndefined();
     });
@@ -68,7 +68,7 @@ describe("getDiff", () => {
               Test: "right",
             },
           },
-        }
+        },
       );
       expect(result).toBeUndefined();
     });
@@ -103,7 +103,7 @@ describe("getDiff", () => {
               Test: "right",
             },
           },
-        }
+        },
       );
       expect(result).toBeUndefined();
     });
@@ -115,7 +115,7 @@ describe("getDiff", () => {
         .reply(404, {});
 
       return expect(
-        getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation)
+        getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation),
       ).rejects.toThrow(/Could not obtain introspection result/);
     });
 
@@ -126,7 +126,7 @@ describe("getDiff", () => {
         .reply(200, { invalid: "response" });
 
       return expect(
-        getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation)
+        getDiff(testRemoteSchemaLocation, testRemoteSchemaLocation),
       ).rejects.toThrow(/Could not obtain introspection result/);
     });
 
@@ -139,7 +139,7 @@ describe("getDiff", () => {
     it("works with exact path to file", async () => {
       const localSchemaLocation = path.join(
         __dirname,
-        "./fixtures/localSchema.graphql"
+        "./fixtures/localSchema.graphql",
       );
       const result = await getDiff(localSchemaLocation, localSchemaLocation);
       expect(result).toBeUndefined();
@@ -148,7 +148,7 @@ describe("getDiff", () => {
     it("works with glob pattern", async () => {
       const localSchemaLocation = path.join(
         __dirname,
-        "./fixtures/**/localSchema.graphql"
+        "./fixtures/**/localSchema.graphql",
       );
       const result = await getDiff(localSchemaLocation, localSchemaLocation);
       expect(result).toBeUndefined();
@@ -158,10 +158,10 @@ describe("getDiff", () => {
       return expect(
         getDiff(
           path.join(__dirname, "invalidLocation"),
-          path.join(__dirname, "invalidLocation")
-        )
+          path.join(__dirname, "invalidLocation"),
+        ),
       ).rejects.toThrow(
-        /Unable to find any GraphQL type definitions for the following pointers/
+        /Unable to find any GraphQL type definitions for the following pointers/,
       );
     });
 
@@ -169,10 +169,10 @@ describe("getDiff", () => {
       return expect(
         getDiff(
           path.join(__dirname, "/**/*.invalidgql"),
-          path.join(__dirname, "/**/*.invalidgql")
-        )
+          path.join(__dirname, "/**/*.invalidgql"),
+        ),
       ).rejects.toThrow(
-        /Unable to find any GraphQL type definitions for the following pointer/
+        /Unable to find any GraphQL type definitions for the following pointer/,
       );
     });
   });
@@ -181,7 +181,7 @@ describe("getDiff", () => {
     it("returns the exact diff between two schemas", async () => {
       const result = await getDiff(
         path.join(__dirname, "fixtures/localSchema.graphql"),
-        path.join(__dirname, "fixtures/localSchemaDangerous.graphql")
+        path.join(__dirname, "fixtures/localSchemaDangerous.graphql"),
       );
 
       expect(result).toBeDefined();
@@ -194,7 +194,7 @@ describe("getDiff", () => {
     it("returns the diff between two schemas with changed directives", async () => {
       const result = await getDiff(
         path.join(__dirname, "fixtures/localSchemaDirective.graphql"),
-        path.join(__dirname, "fixtures/localSchemaDirectiveChanged.graphql")
+        path.join(__dirname, "fixtures/localSchemaDirectiveChanged.graphql"),
       );
 
       expect(result).toBeDefined();
@@ -207,7 +207,7 @@ describe("getDiff", () => {
     it("returns dangerous changes", async () => {
       const result = await getDiff(
         path.join(__dirname, "fixtures/localSchema.graphql"),
-        path.join(__dirname, "fixtures/localSchemaDangerous.graphql")
+        path.join(__dirname, "fixtures/localSchemaDangerous.graphql"),
       );
 
       expect(result).toBeDefined();
@@ -225,7 +225,7 @@ describe("getDiff", () => {
     it("returns breaking changes", async () => {
       const result = await getDiff(
         path.join(__dirname, "fixtures/localSchema.graphql"),
-        path.join(__dirname, "fixtures/localSchemaBreaking.graphql")
+        path.join(__dirname, "fixtures/localSchemaBreaking.graphql"),
       );
 
       expect(result).toBeDefined();
@@ -245,7 +245,7 @@ describe("getDiff", () => {
     it("returns diff between two unsorted, but otherwise equal schemas, when sorting not enabled", async () => {
       const result = await getDiff(
         path.join(__dirname, "fixtures/localSchemaSorted.graphql"),
-        path.join(__dirname, "fixtures/localSchemaUnsorted.graphql")
+        path.join(__dirname, "fixtures/localSchemaUnsorted.graphql"),
       );
 
       expect(result).toBeDefined();
@@ -255,7 +255,7 @@ describe("getDiff", () => {
       const result = await getDiff(
         path.join(__dirname, "fixtures/localSchemaSorted.graphql"),
         path.join(__dirname, "fixtures/localSchemaUnsorted.graphql"),
-        { sortSchema: true }
+        { sortSchema: true },
       );
 
       expect(result).toBeUndefined();

@@ -68,7 +68,7 @@ const cli = meow(
         alias: "v",
       },
     },
-  }
+  },
 );
 
 function parseHeaders(headerInput?: string | string[]): Headers | undefined {
@@ -89,7 +89,7 @@ function parseHeaders(headerInput?: string | string[]): Headers | undefined {
       ...result,
       ...(key && value && { [key]: value }),
     }),
-    {}
+    {},
   );
 }
 
@@ -109,8 +109,8 @@ if (!leftSchemaLocation || !rightSchemaLocation) {
     chalk.red("ERROR: Schema locations missing!\n\n"),
     chalk.gray(
       "Usage\n" +
-        "  $ graphql-schema-diff <leftSchemaLocation> <rightSchemaLocation>"
-    )
+        "  $ graphql-schema-diff <leftSchemaLocation> <rightSchemaLocation>",
+    ),
   );
   process.exit(1);
 }

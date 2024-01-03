@@ -41,7 +41,7 @@ export interface Options {
 
 export async function createHtmlOutput(
   diff: string,
-  options: Options = {}
+  options: Options = {},
 ): Promise<void> {
   const { outputDirectory = "schemaDiff" } = options;
 
@@ -54,35 +54,35 @@ export async function createHtmlOutput(
 
   const diff2HtmlPath = path.dirname(require.resolve("diff2html/package.json"));
   const highlightJsPath = path.dirname(
-    require.resolve("@highlightjs/cdn-assets/package.json")
+    require.resolve("@highlightjs/cdn-assets/package.json"),
   );
 
   await Promise.all([
     fs.copy(
       path.join(diff2HtmlPath, "bundles/js/diff2html.min.js"),
-      path.join(outputDirectory, "js/diff2html.min.js")
+      path.join(outputDirectory, "js/diff2html.min.js"),
     ),
     fs.copy(
       path.join(diff2HtmlPath, "bundles/css/diff2html.min.css"),
-      path.join(outputDirectory, "css/diff2html.min.css")
+      path.join(outputDirectory, "css/diff2html.min.css"),
     ),
     fs.copy(
       path.join(highlightJsPath, "styles/default.min.css"),
-      path.join(outputDirectory, "css/hljs.min.css")
+      path.join(outputDirectory, "css/hljs.min.css"),
     ),
     fs.copy(
       path.join(highlightJsPath, "highlight.min.js"),
-      path.join(outputDirectory, "js/highlight.min.js")
+      path.join(outputDirectory, "js/highlight.min.js"),
     ),
     fs.copy(
       path.join(highlightJsPath, "languages/graphql.min.js"),
-      path.join(outputDirectory, "js/graphql.min.js")
+      path.join(outputDirectory, "js/graphql.min.js"),
     ),
   ]);
 
   const diff2htmlUiBase = (
     await fs.readFile(
-      path.join(diff2HtmlPath, "bundles/js/diff2html-ui-base.min.js")
+      path.join(diff2HtmlPath, "bundles/js/diff2html-ui-base.min.js"),
     )
   )
     .toString()
@@ -94,7 +94,7 @@ export async function createHtmlOutput(
     fs.writeFile(path.join(outputDirectory, "index.html"), htmlOutput),
     fs.writeFile(
       path.join(outputDirectory, "js/diff2html-ui-base.min.js"),
-      diff2htmlUiBase
+      diff2htmlUiBase,
     ),
   ]);
 }

@@ -1,4 +1,6 @@
-directive @test(name: String!) repeatable on FIELD_DEFINITION | INTERFACE | OBJECT | UNION | INPUT_FIELD_DEFINITION | ENUM | INPUT_OBJECT
+directive @test(
+  name: String!
+) repeatable on FIELD_DEFINITION | INTERFACE | OBJECT | UNION | INPUT_FIELD_DEFINITION | ENUM | INPUT_OBJECT
 
 type Query {
   test: String
