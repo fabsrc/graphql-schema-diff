@@ -879,12 +879,12 @@
       }
     },
     "node_modules/@graphql-tools/load": {
-      "version": "8.0.0",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/load/-/load-8.0.0.tgz",
-      "integrity": "sha512-Cy874bQJH0FP2Az7ELPM49iDzOljQmK1PPH6IuxsWzLSTxwTqd8dXA09dcVZrI7/LsN26heTY2R8q2aiiv0GxQ==",
+      "version": "8.0.1",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/load/-/load-8.0.1.tgz",
+      "integrity": "sha512-qSMsKngJhDqRbuWyo3NvakEFqFL6+eSjy8ooJ1o5qYD26N7dqXkKzIMycQsX7rBK19hOuINAUSaRcVWH6hTccw==",
       "dependencies": {
         "@graphql-tools/schema": "^10.0.0",
-        "@graphql-tools/utils": "^10.0.0",
+        "@graphql-tools/utils": "^10.0.11",
         "p-limit": "3.1.0",
         "tslib": "^2.4.0"
       },
@@ -954,11 +954,12 @@
       }
     },
     "node_modules/@graphql-tools/utils": {
-      "version": "10.0.5",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.0.5.tgz",
-      "integrity": "sha512-ZTioQqg9z9eCG3j+KDy54k1gp6wRIsLqkx5yi163KVvXVkfjsrdErCyZjrEug21QnKE9piP4tyxMpMMOT1RuRw==",
+      "version": "10.0.12",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.0.12.tgz",
+      "integrity": "sha512-+yS1qlFwXlwU3Gv8ek/h2aJ95quog4yF22haC11M0zReMSTddbGJZ5yXKkE3sXoY2BcL1utilSFjylJ9uXpSNQ==",
       "dependencies": {
         "@graphql-typed-document-node/core": "^3.1.1",
+        "cross-inspect": "1.0.0",
         "dset": "^3.1.2",
         "tslib": "^2.4.0"
       },
@@ -2116,6 +2117,17 @@
       "resolved": "https://registry.npmjs.org/create-require/-/create-require-1.1.1.tgz",
       "integrity": "sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==",
       "dev": true
+    },
+    "node_modules/cross-inspect": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/cross-inspect/-/cross-inspect-1.0.0.tgz",
+      "integrity": "sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==",
+      "dependencies": {
+        "tslib": "^2.4.0"
+      },
+      "engines": {
+        "node": ">=16.0.0"
+      }
     },
     "node_modules/cross-spawn": {
       "version": "7.0.3",
@@ -5742,12 +5754,12 @@
       }
     },
     "@graphql-tools/load": {
-      "version": "8.0.0",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/load/-/load-8.0.0.tgz",
-      "integrity": "sha512-Cy874bQJH0FP2Az7ELPM49iDzOljQmK1PPH6IuxsWzLSTxwTqd8dXA09dcVZrI7/LsN26heTY2R8q2aiiv0GxQ==",
+      "version": "8.0.1",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/load/-/load-8.0.1.tgz",
+      "integrity": "sha512-qSMsKngJhDqRbuWyo3NvakEFqFL6+eSjy8ooJ1o5qYD26N7dqXkKzIMycQsX7rBK19hOuINAUSaRcVWH6hTccw==",
       "requires": {
         "@graphql-tools/schema": "^10.0.0",
-        "@graphql-tools/utils": "^10.0.0",
+        "@graphql-tools/utils": "^10.0.11",
         "p-limit": "3.1.0",
         "tslib": "^2.4.0"
       }
@@ -5793,11 +5805,12 @@
       }
     },
     "@graphql-tools/utils": {
-      "version": "10.0.5",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.0.5.tgz",
-      "integrity": "sha512-ZTioQqg9z9eCG3j+KDy54k1gp6wRIsLqkx5yi163KVvXVkfjsrdErCyZjrEug21QnKE9piP4tyxMpMMOT1RuRw==",
+      "version": "10.0.12",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.0.12.tgz",
+      "integrity": "sha512-+yS1qlFwXlwU3Gv8ek/h2aJ95quog4yF22haC11M0zReMSTddbGJZ5yXKkE3sXoY2BcL1utilSFjylJ9uXpSNQ==",
       "requires": {
         "@graphql-typed-document-node/core": "^3.1.1",
+        "cross-inspect": "1.0.0",
         "dset": "^3.1.2",
         "tslib": "^2.4.0"
       }
@@ -6723,6 +6736,14 @@
       "resolved": "https://registry.npmjs.org/create-require/-/create-require-1.1.1.tgz",
       "integrity": "sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==",
       "dev": true
+    },
+    "cross-inspect": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/cross-inspect/-/cross-inspect-1.0.0.tgz",
+      "integrity": "sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==",
+      "requires": {
+        "tslib": "^2.4.0"
+      }
     },
     "cross-spawn": {
       "version": "7.0.3",
