@@ -879,12 +879,12 @@
       }
     },
     "node_modules/@graphql-tools/load": {
-      "version": "8.0.0",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/load/-/load-8.0.0.tgz",
-      "integrity": "sha512-Cy874bQJH0FP2Az7ELPM49iDzOljQmK1PPH6IuxsWzLSTxwTqd8dXA09dcVZrI7/LsN26heTY2R8q2aiiv0GxQ==",
+      "version": "8.0.2",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/load/-/load-8.0.2.tgz",
+      "integrity": "sha512-S+E/cmyVmJ3CuCNfDuNF2EyovTwdWfQScXv/2gmvJOti2rGD8jTt9GYVzXaxhblLivQR9sBUCNZu/w7j7aXUCA==",
       "dependencies": {
-        "@graphql-tools/schema": "^10.0.0",
-        "@graphql-tools/utils": "^10.0.0",
+        "@graphql-tools/schema": "^10.0.3",
+        "@graphql-tools/utils": "^10.0.13",
         "p-limit": "3.1.0",
         "tslib": "^2.4.0"
       },
@@ -896,11 +896,11 @@
       }
     },
     "node_modules/@graphql-tools/merge": {
-      "version": "9.0.0",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/merge/-/merge-9.0.0.tgz",
-      "integrity": "sha512-J7/xqjkGTTwOJmaJQJ2C+VDBDOWJL3lKrHJN4yMaRLAJH3PosB7GiPRaSDZdErs0+F77sH2MKs2haMMkywzx7Q==",
+      "version": "9.0.3",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/merge/-/merge-9.0.3.tgz",
+      "integrity": "sha512-FeKv9lKLMwqDu0pQjPpF59GY3HReUkWXKsMIuMuJQOKh9BETu7zPEFUELvcw8w+lwZkl4ileJsHXC9+AnsT2Lw==",
       "dependencies": {
-        "@graphql-tools/utils": "^10.0.0",
+        "@graphql-tools/utils": "^10.0.13",
         "tslib": "^2.4.0"
       },
       "engines": {
@@ -911,12 +911,12 @@
       }
     },
     "node_modules/@graphql-tools/schema": {
-      "version": "10.0.0",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/schema/-/schema-10.0.0.tgz",
-      "integrity": "sha512-kf3qOXMFcMs2f/S8Y3A8fm/2w+GaHAkfr3Gnhh2LOug/JgpY/ywgFVxO3jOeSpSEdoYcDKLcXVjMigNbY4AdQg==",
+      "version": "10.0.3",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/schema/-/schema-10.0.3.tgz",
+      "integrity": "sha512-p28Oh9EcOna6i0yLaCFOnkcBDQECVf3SCexT6ktb86QNj9idnkhI+tCxnwZDh58Qvjd2nURdkbevvoZkvxzCog==",
       "dependencies": {
-        "@graphql-tools/merge": "^9.0.0",
-        "@graphql-tools/utils": "^10.0.0",
+        "@graphql-tools/merge": "^9.0.3",
+        "@graphql-tools/utils": "^10.0.13",
         "tslib": "^2.4.0",
         "value-or-promise": "^1.0.12"
       },
@@ -954,11 +954,12 @@
       }
     },
     "node_modules/@graphql-tools/utils": {
-      "version": "10.0.5",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.0.5.tgz",
-      "integrity": "sha512-ZTioQqg9z9eCG3j+KDy54k1gp6wRIsLqkx5yi163KVvXVkfjsrdErCyZjrEug21QnKE9piP4tyxMpMMOT1RuRw==",
+      "version": "10.1.0",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.1.0.tgz",
+      "integrity": "sha512-wLPqhgeZ9BZJPRoaQbsDN/CtJDPd/L4qmmtPkjI3NuYJ39x+Eqz1Sh34EAGMuDh+xlOHqBwHczkZUpoK9tvzjw==",
       "dependencies": {
         "@graphql-typed-document-node/core": "^3.1.1",
+        "cross-inspect": "1.0.0",
         "dset": "^3.1.2",
         "tslib": "^2.4.0"
       },
@@ -2116,6 +2117,17 @@
       "resolved": "https://registry.npmjs.org/create-require/-/create-require-1.1.1.tgz",
       "integrity": "sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==",
       "dev": true
+    },
+    "node_modules/cross-inspect": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/cross-inspect/-/cross-inspect-1.0.0.tgz",
+      "integrity": "sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==",
+      "dependencies": {
+        "tslib": "^2.4.0"
+      },
+      "engines": {
+        "node": ">=16.0.0"
+      }
     },
     "node_modules/cross-spawn": {
       "version": "7.0.3",
@@ -5742,32 +5754,32 @@
       }
     },
     "@graphql-tools/load": {
-      "version": "8.0.0",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/load/-/load-8.0.0.tgz",
-      "integrity": "sha512-Cy874bQJH0FP2Az7ELPM49iDzOljQmK1PPH6IuxsWzLSTxwTqd8dXA09dcVZrI7/LsN26heTY2R8q2aiiv0GxQ==",
+      "version": "8.0.2",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/load/-/load-8.0.2.tgz",
+      "integrity": "sha512-S+E/cmyVmJ3CuCNfDuNF2EyovTwdWfQScXv/2gmvJOti2rGD8jTt9GYVzXaxhblLivQR9sBUCNZu/w7j7aXUCA==",
       "requires": {
-        "@graphql-tools/schema": "^10.0.0",
-        "@graphql-tools/utils": "^10.0.0",
+        "@graphql-tools/schema": "^10.0.3",
+        "@graphql-tools/utils": "^10.0.13",
         "p-limit": "3.1.0",
         "tslib": "^2.4.0"
       }
     },
     "@graphql-tools/merge": {
-      "version": "9.0.0",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/merge/-/merge-9.0.0.tgz",
-      "integrity": "sha512-J7/xqjkGTTwOJmaJQJ2C+VDBDOWJL3lKrHJN4yMaRLAJH3PosB7GiPRaSDZdErs0+F77sH2MKs2haMMkywzx7Q==",
+      "version": "9.0.3",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/merge/-/merge-9.0.3.tgz",
+      "integrity": "sha512-FeKv9lKLMwqDu0pQjPpF59GY3HReUkWXKsMIuMuJQOKh9BETu7zPEFUELvcw8w+lwZkl4ileJsHXC9+AnsT2Lw==",
       "requires": {
-        "@graphql-tools/utils": "^10.0.0",
+        "@graphql-tools/utils": "^10.0.13",
         "tslib": "^2.4.0"
       }
     },
     "@graphql-tools/schema": {
-      "version": "10.0.0",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/schema/-/schema-10.0.0.tgz",
-      "integrity": "sha512-kf3qOXMFcMs2f/S8Y3A8fm/2w+GaHAkfr3Gnhh2LOug/JgpY/ywgFVxO3jOeSpSEdoYcDKLcXVjMigNbY4AdQg==",
+      "version": "10.0.3",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/schema/-/schema-10.0.3.tgz",
+      "integrity": "sha512-p28Oh9EcOna6i0yLaCFOnkcBDQECVf3SCexT6ktb86QNj9idnkhI+tCxnwZDh58Qvjd2nURdkbevvoZkvxzCog==",
       "requires": {
-        "@graphql-tools/merge": "^9.0.0",
-        "@graphql-tools/utils": "^10.0.0",
+        "@graphql-tools/merge": "^9.0.3",
+        "@graphql-tools/utils": "^10.0.13",
         "tslib": "^2.4.0",
         "value-or-promise": "^1.0.12"
       }
@@ -5793,11 +5805,12 @@
       }
     },
     "@graphql-tools/utils": {
-      "version": "10.0.5",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.0.5.tgz",
-      "integrity": "sha512-ZTioQqg9z9eCG3j+KDy54k1gp6wRIsLqkx5yi163KVvXVkfjsrdErCyZjrEug21QnKE9piP4tyxMpMMOT1RuRw==",
+      "version": "10.1.0",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.1.0.tgz",
+      "integrity": "sha512-wLPqhgeZ9BZJPRoaQbsDN/CtJDPd/L4qmmtPkjI3NuYJ39x+Eqz1Sh34EAGMuDh+xlOHqBwHczkZUpoK9tvzjw==",
       "requires": {
         "@graphql-typed-document-node/core": "^3.1.1",
+        "cross-inspect": "1.0.0",
         "dset": "^3.1.2",
         "tslib": "^2.4.0"
       }
@@ -6723,6 +6736,14 @@
       "resolved": "https://registry.npmjs.org/create-require/-/create-require-1.1.1.tgz",
       "integrity": "sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==",
       "dev": true
+    },
+    "cross-inspect": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/cross-inspect/-/cross-inspect-1.0.0.tgz",
+      "integrity": "sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==",
+      "requires": {
+        "tslib": "^2.4.0"
+      }
     },
     "cross-spawn": {
       "version": "7.0.3",
