@@ -6,7 +6,7 @@ import {
 } from "graphql";
 import { lexicographicSortSchema } from "graphql/utilities";
 import disparity from "disparity";
-import { loadSchema } from "@graphql-tools/load";
+import { LoadSchemaOptions, loadSchema } from "@graphql-tools/load";
 import { UrlLoader } from "@graphql-tools/url-loader";
 import { JsonFileLoader } from "@graphql-tools/json-file-loader";
 import { printSchemaWithDirectives } from "@graphql-tools/utils";
@@ -31,6 +31,7 @@ export interface DiffOptions {
   };
   headers?: Headers;
   sortSchema?: boolean;
+  inputValueDeprecation?: boolean;
 }
 
 export async function getDiff(
@@ -38,11 +39,14 @@ export async function getDiff(
   rightSchemaLocation: string,
   options: DiffOptions = {},
 ): Promise<DiffResponse | undefined> {
-  const getSchemaOptions = (customHeaders?: Headers) => ({
+  const getSchemaOptions: (
+    customHeaders?: Headers,
+  ) => Omit<LoadSchemaOptions, "loaders"> = (customHeaders) => ({
     headers: { ...options.headers, ...customHeaders },
     skipGraphQLImport: false,
     descriptions: false,
     customFetch: fetch,
+    inputValueDeprecation: options.inputValueDeprecation,
   });
   const leftSchemaOptions = getSchemaOptions(options.leftSchema?.headers);
   const rightSchemaOptions = getSchemaOptions(options.rightSchema?.headers);
