@@ -20,7 +20,7 @@ const cli = meow(
     --left-schema-header \t Header to send to left remote schema source
     --right-schema-header \t Header to send to right remote schema source
     --sort-schema, -s \t\t Sort schemas prior to diffing
-    --input-value-deprecation \t Include deprecated input value fields
+    --input-value-deprecation \t Include deprecated input value fields when loading from URL
 
   Examples
     $ graphql-schema-diff https://example.com/graphql schema.graphql

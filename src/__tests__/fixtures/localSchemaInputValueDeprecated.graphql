@@ -1,0 +1,6 @@
+type Query {
+  field1(
+    testInput1: String
+    testInput2: Float @deprecated(reason: "test2 is deprecated")
+  ): String
+}

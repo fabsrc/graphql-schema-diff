@@ -31,7 +31,7 @@ $ graphql-schema-diff --help
     --left-schema-header         Header to send to left remote schema source
     --right-schema-header        Header to send to right remote schema source
     --sort-schema, -s            Sort schemas prior to diffing
-    --input-value-deprecation    Include deprecated input value fields   
+    --input-value-deprecation    Include deprecated input value fields when loading from URL
 
   Examples
     $ graphql-schema-diff https://example.com/graphql schema.graphql

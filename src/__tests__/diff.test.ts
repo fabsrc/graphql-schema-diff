@@ -3,6 +3,8 @@ import path from "path";
 import { getDiff } from "../diff";
 import { getIntrospectionQuery, parse, print } from "graphql";
 import introspectionResponse from "./fixtures/introspectionResponse.json";
+import { graphql, buildSchema } from "graphql";
+import fs from "fs/promises";
 
 describe("getDiff", () => {
   describe("remote schema fetching", () => {
@@ -259,6 +261,65 @@ describe("getDiff", () => {
       );
 
       expect(result).toBeUndefined();
+    });
+  });
+
+  describe("input arg deprecation", () => {
+    it("introspection misses deprecated input args fields by default", async () => {
+      const localSchemaInputValueDeprecated = path.join(
+        __dirname,
+        "fixtures/localSchemaInputValueDeprecated.graphql",
+      );
+      const testRemoteSchemaLocation = "http://test/graphql";
+      const schema = buildSchema(
+        await fs.readFile(localSchemaInputValueDeprecated, "utf-8"),
+      );
+
+      nock(testRemoteSchemaLocation)
+        .post(/.*/)
+        .reply(200, (_uri, source: { query: string }) => {
+          return graphql({ schema, source: source.query, rootValue: {} });
+        });
+
+      const result = await getDiff(
+        localSchemaInputValueDeprecated,
+        testRemoteSchemaLocation,
+      );
+
+      expect(result).toBeDefined();
+
+      if (result) {
+        expect(result.diff).toContain("+  field1(testInput1: String): String");
+      }
+    });
+
+    it("introspection sees deprecated input args when inputValueDeprecation specified", async () => {
+      const localSchemaInputValueDeprecated = path.join(
+        __dirname,
+        "fixtures/localSchemaInputValueDeprecated.graphql",
+      );
+      const testRemoteSchemaLocation = "http://test/graphql";
+      const schema = buildSchema(
+        await fs.readFile(localSchemaInputValueDeprecated, "utf-8"),
+      );
+
+      nock(testRemoteSchemaLocation)
+        .post(/.*/)
+        .reply(200, (_uri, source: { query: string }) => {
+          return graphql({ schema, source: source.query, rootValue: {} });
+        });
+
+      const result = await getDiff(
+        testRemoteSchemaLocation,
+        localSchemaInputValueDeprecated,
+        { inputValueDeprecation: true },
+      );
+
+      expect(result).toBeUndefined();
+    });
+
+    afterEach(() => {
+      nock.cleanAll();
     });
   });
 });
