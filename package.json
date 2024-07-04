@@ -2,17 +2,29 @@
   "name": "graphql-schema-diff",
   "version": "2.9.0",
   "description": "Returns the diff of two GraphQL schemas. Detects dangerous and breaking changes.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "import": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "require": {
+      "types": "./dist/index.d.cts",
+      "require": "./dist/index.cjs"
+    }
+  },
   "scripts": {
-    "build": "tsc",
-    "dev": "ts-node --files src/cli",
+    "build": "tsup src/index.ts src/cli.ts --format cjs,esm --dts --clean --sourcemap --no-splitting",
+    "dev": "tsx src/cli",
     "prepack": "npm run build",
     "test": "jest",
     "fmt": "prettier --write src/**"
   },
   "bin": {
-    "graphql-schema-diff": "dist/cli.js"
+    "graphql-schema-diff": "./dist/cli.js"
   },
   "files": [
     "dist/",
@@ -43,13 +55,11 @@
     "chalk": "^4.1.2",
     "diff2html": "^3.4.35",
     "disparity": "^3.2.0",
-    "fs-extra": "^11.1.1",
     "graphql": "^16.8.1",
     "meow": "^9.0.0",
     "node-fetch": "^2.6.11"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
     "@types/hogan.js": "^3.0.1",
     "@types/jest": "^28.1.8",
     "@types/node": "^20.2.5",
@@ -58,11 +68,12 @@
     "nock": "^13.3.1",
     "prettier": "^3.1.1",
     "ts-jest": "^28.0.8",
-    "ts-node": "^10.9.1",
+    "tsup": "^8.1.0",
+    "tsx": "^4.16.2",
     "typescript": "^5.0.4"
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 20"
   },
   "jest": {
     "roots": [
