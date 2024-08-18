@@ -1,5 +1,6 @@
-import path from "path";
-import fs from "fs-extra";
+import path from "node:path";
+import fs from "node:fs";
+import fsP from "node:fs/promises";
 
 const htmlTemplate = (diff: string): string => `<html>
 <head>
@@ -41,7 +42,7 @@ export interface Options {
 
 export async function createHtmlOutput(
   diff: string,
-  options: Options = {},
+  options: Options = {}
 ): Promise<void> {
   const { outputDirectory = "schemaDiff" } = options;
 
@@ -50,39 +51,49 @@ export async function createHtmlOutput(
     .replace(/(\+\+\+\s.*)\sadded/, "$1")
     .replace("No newline at end of file", "");
 
-  await fs.ensureDir(outputDirectory);
+  if (!fs.existsSync(path.join(outputDirectory, "js"))) {
+    fs.mkdirSync(path.join(outputDirectory, "js"), { recursive: true });
+  }
 
-  const diff2HtmlPath = path.dirname(require.resolve("diff2html/package.json"));
-  const highlightJsPath = path.dirname(
-    require.resolve("@highlightjs/cdn-assets/package.json"),
-  );
+  if (!fs.existsSync(path.join(outputDirectory, "css"))) {
+    fs.mkdirSync(path.join(outputDirectory, "css"), { recursive: true });
+  }
+
+  const diff2HtmlPath = new URL(
+    ".",
+    import.meta.resolve("diff2html/package.json")
+  ).pathname;
+  const highlightJsPath = new URL(
+    ".",
+    import.meta.resolve("@highlightjs/cdn-assets/package.json")
+  ).pathname;
 
   await Promise.all([
-    fs.copy(
+    fsP.copyFile(
       path.join(diff2HtmlPath, "bundles/js/diff2html.min.js"),
-      path.join(outputDirectory, "js/diff2html.min.js"),
+      path.join(outputDirectory, "js/diff2html.min.js")
     ),
-    fs.copy(
+    fsP.copyFile(
       path.join(diff2HtmlPath, "bundles/css/diff2html.min.css"),
-      path.join(outputDirectory, "css/diff2html.min.css"),
+      path.join(outputDirectory, "css/diff2html.min.css")
     ),
-    fs.copy(
+    fsP.copyFile(
       path.join(highlightJsPath, "styles/default.min.css"),
-      path.join(outputDirectory, "css/hljs.min.css"),
+      path.join(outputDirectory, "css/hljs.min.css")
     ),
-    fs.copy(
+    fsP.copyFile(
       path.join(highlightJsPath, "highlight.min.js"),
-      path.join(outputDirectory, "js/highlight.min.js"),
+      path.join(outputDirectory, "js/highlight.min.js")
     ),
-    fs.copy(
+    fsP.copyFile(
       path.join(highlightJsPath, "languages/graphql.min.js"),
-      path.join(outputDirectory, "js/graphql.min.js"),
+      path.join(outputDirectory, "js/graphql.min.js")
     ),
   ]);
 
   const diff2htmlUiBase = (
-    await fs.readFile(
-      path.join(diff2HtmlPath, "bundles/js/diff2html-ui-base.min.js"),
+    await fsP.readFile(
+      path.join(diff2HtmlPath, "bundles/js/diff2html-ui-base.min.js")
     )
   )
     .toString()
@@ -91,10 +102,10 @@ export async function createHtmlOutput(
 
   const htmlOutput = htmlTemplate(adjustedDiff);
   await Promise.all([
-    fs.writeFile(path.join(outputDirectory, "index.html"), htmlOutput),
-    fs.writeFile(
+    fsP.writeFile(path.join(outputDirectory, "index.html"), htmlOutput),
+    fsP.writeFile(
       path.join(outputDirectory, "js/diff2html-ui-base.min.js"),
-      diff2htmlUiBase,
+      diff2htmlUiBase
     ),
   ]);
 }

@@ -2,8 +2,8 @@
 
 import meow from "meow";
 import chalk from "chalk";
-import { createHtmlOutput } from "./html";
-import { getDiff, Headers } from "./diff";
+import { createHtmlOutput } from "./html.js";
+import { getDiff, Headers } from "./diff.js";
 
 const cli = meow(
   `

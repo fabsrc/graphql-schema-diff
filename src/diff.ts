@@ -4,7 +4,7 @@ import {
   DangerousChange,
   BreakingChange,
 } from "graphql";
-import { lexicographicSortSchema } from "graphql/utilities";
+import { lexicographicSortSchema } from "graphql/utilities/lexicographicSortSchema.js";
 import disparity from "disparity";
 import { LoadSchemaOptions, loadSchema } from "@graphql-tools/load";
 import { UrlLoader } from "@graphql-tools/url-loader";
