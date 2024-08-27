@@ -1324,12 +1324,12 @@
       }
     },
     "node_modules/@graphql-tools/utils": {
-      "version": "10.2.3",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.2.3.tgz",
-      "integrity": "sha512-j7x0sO0VtWVhD3FubyY42abx+g61/at5W5Y3DSOckPkBo7yVjkcnAsXoB4jiUnznhGme/o+uX5VgA8HrjyR5ZQ==",
+      "version": "10.5.4",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.5.4.tgz",
+      "integrity": "sha512-XHnyCWSlg1ccsD8s0y6ugo5GZ5TpkTiFVNPSYms5G0s6Z/xTuSmiLBfeqgkfaCwLmLaQnRCmNDL2JRnqc2R5bQ==",
       "dependencies": {
         "@graphql-typed-document-node/core": "^3.1.1",
-        "cross-inspect": "1.0.0",
+        "cross-inspect": "1.0.1",
         "dset": "^3.1.2",
         "tslib": "^2.4.0"
       },
@@ -2881,9 +2881,9 @@
       "peer": true
     },
     "node_modules/cross-inspect": {
-      "version": "1.0.0",
-      "resolved": "https://registry.npmjs.org/cross-inspect/-/cross-inspect-1.0.0.tgz",
-      "integrity": "sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==",
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/cross-inspect/-/cross-inspect-1.0.1.tgz",
+      "integrity": "sha512-Pcw1JTvZLSJH83iiGWt6fRcT+BjZlCDRVwYLbUcHzv/CRpB7r0MlSrGbIyQvVSNyGnbt7G4AXuyCiDR3POvZ1A==",
       "dependencies": {
         "tslib": "^2.4.0"
       },
@@ -7304,12 +7304,12 @@
       }
     },
     "@graphql-tools/utils": {
-      "version": "10.2.3",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.2.3.tgz",
-      "integrity": "sha512-j7x0sO0VtWVhD3FubyY42abx+g61/at5W5Y3DSOckPkBo7yVjkcnAsXoB4jiUnznhGme/o+uX5VgA8HrjyR5ZQ==",
+      "version": "10.5.4",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/utils/-/utils-10.5.4.tgz",
+      "integrity": "sha512-XHnyCWSlg1ccsD8s0y6ugo5GZ5TpkTiFVNPSYms5G0s6Z/xTuSmiLBfeqgkfaCwLmLaQnRCmNDL2JRnqc2R5bQ==",
       "requires": {
         "@graphql-typed-document-node/core": "^3.1.1",
-        "cross-inspect": "1.0.0",
+        "cross-inspect": "1.0.1",
         "dset": "^3.1.2",
         "tslib": "^2.4.0"
       }
@@ -8473,9 +8473,9 @@
       "peer": true
     },
     "cross-inspect": {
-      "version": "1.0.0",
-      "resolved": "https://registry.npmjs.org/cross-inspect/-/cross-inspect-1.0.0.tgz",
-      "integrity": "sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==",
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/cross-inspect/-/cross-inspect-1.0.1.tgz",
+      "integrity": "sha512-Pcw1JTvZLSJH83iiGWt6fRcT+BjZlCDRVwYLbUcHzv/CRpB7r0MlSrGbIyQvVSNyGnbt7G4AXuyCiDR3POvZ1A==",
       "requires": {
         "tslib": "^2.4.0"
       }
